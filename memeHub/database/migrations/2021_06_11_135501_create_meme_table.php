@@ -13,12 +13,13 @@ class CreateMemeTable extends Migration
      */
     public function up()
     {
-        Schema::create('meme', function (Blueprint $table) {
+        Schema::create('memes', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->string('GUID');
-            $table->integer('likes');
-            $table->integer('dislikes');
+            $table->string('meme');
+            $table->foreignId('user_id')->references('id')->on('users')->constrained();
+            $table->integer('likes')->nullable();
+            $table->integer('dislikes')->nullable();
         });
     }
 
@@ -29,6 +30,6 @@ class CreateMemeTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('meme');
+        Schema::dropIfExists('memes');
     }
 }

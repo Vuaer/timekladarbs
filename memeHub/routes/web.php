@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\MemeController;
 use Illuminate\Support\Facades\Route;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -13,14 +15,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-
-Route::get('/', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
+Route::resource('meme', MemeController::class);
+Route::get('/',[MemeController::class,'index']);
 require __DIR__.'/auth.php';
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
 
-require __DIR__.'/auth.php';
+
+Route::post('/meme',[MemeController::class,'upload']);
