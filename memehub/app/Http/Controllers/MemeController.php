@@ -20,7 +20,7 @@ class MemeController extends Controller
     
     public function index()
     {
-        $memes=Meme::all();
+        $memes=Meme::orderBy('id','DESC')->get();
         return view('dashboard', compact('memes'));
     }
 
