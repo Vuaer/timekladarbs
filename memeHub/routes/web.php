@@ -4,6 +4,7 @@ use App\Http\Controllers\MemeController;
 use Illuminate\Support\Facades\Route;
 
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -19,6 +20,5 @@ Route::resource('meme', MemeController::class);
 Route::get('/',[MemeController::class,'index']);
 require __DIR__.'/auth.php';
 
-
-
 Route::post('/meme',[MemeController::class,'upload']);
+Route::delete('/meme/{id}',[MemeController::class,'destroy']);
