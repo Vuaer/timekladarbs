@@ -17,7 +17,7 @@ class CreateMemeKeywordTable extends Migration
             $table->id();
             $table->timestamps();
             $table->foreignId('keyword_id')->constrained('keywords');
-            $table->foreignId('meme_id')->constrained('meme');
+            $table->foreignId('meme_id')->constrained('memes');
         });
     }
 

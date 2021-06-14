@@ -17,7 +17,7 @@ class CreateLibraryMemeCreate extends Migration
             $table->engine = 'InnoDB';
             $table->id();
             $table->timestamps();
-            $table->foreignId('meme_id')->constrained('meme');
+            $table->foreignId('meme_id')->constrained('memes');
             $table->foreignId('library_id')->constrained('library');
         });
     }

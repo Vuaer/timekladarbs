@@ -21,7 +21,7 @@ class CreateCommentTable extends Migration
             $table->integer('likes');
             $table->integer('dislikes');
             $table->foreignId('user_id')->constrained('users');
-            $table->foreignId('meme_id')->constrained('meme');
+            $table->foreignId('meme_id')->constrained('memes');
          
         });
     }
