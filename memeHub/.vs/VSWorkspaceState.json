@@ -1,11 +1,16 @@
 {
   "ExpandedNodes": [
     "",
+    "\\config",
     "\\database",
     "\\database\\migrations",
+    "\\resources",
+    "\\resources\\views",
+    "\\resources\\views\\components",
+    "\\resources\\views\\layouts",
     "\\routes",
     "\\storage"
   ],
-  "SelectedNode": "\\database\\migrations\\2021_06_11_156959_create_meme_keyword_table.php",
+  "SelectedNode": "\\resources\\views\\layouts\\navigation.blade.php",
   "PreviewInSolutionExplorer": false
 }
