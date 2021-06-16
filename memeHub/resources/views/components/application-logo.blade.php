@@ -1,4 +1,4 @@
 
 
-<img src="../../../memehub_icon_placeholder.jpg" alt="fuck" style="height:112px;">
+<img src="../../../memehub_logo.png" alt="Logo" style="height:112px;">
 
