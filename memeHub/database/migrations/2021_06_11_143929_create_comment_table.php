@@ -17,7 +17,7 @@ class CreateCommentTable extends Migration
           $table->engine = 'InnoDB';
             $table->id();
             $table->timestamps();
-            $table->longText('comment_text');
+            $table->Text('comment_text');
             $table->integer('likes');
             $table->integer('dislikes');
             $table->foreignId('user_id')->constrained('users');
