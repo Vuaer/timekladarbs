@@ -16,13 +16,13 @@
                     <x-nav-link :href="route('meme.index')" :active="request()->routeIs('meme.index')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('meme.index')" :active="request()->routeIs('meme.index')">
+                    <x-nav-link href="/profile" :active="request()->routeIs('ProfileController.index')"> 
                         {{ __('Profile') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('meme.index')" :active="request()->routeIs('meme.index')">
+                    <x-nav-link href="/profile/library" :active="request()->routeIs('LibraryController.index')">
                         {{ __('Library') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('meme.index')" :active="request()->routeIs('meme.index')">
+                    <x-nav-link href="/create" :active="request()->routeIs('CreateController.index')">
                         {{ __('Create') }}
                     </x-nav-link>
                     <x-input type="text" name="search" required/>

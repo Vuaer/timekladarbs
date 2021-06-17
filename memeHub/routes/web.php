@@ -1,5 +1,9 @@
 <?php
 
+use App\Http\Controllers\UploadController;
+use App\Http\Controllers\CreateController;
+use App\Http\Controllers\LibraryController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\MemeController;
 use Illuminate\Support\Facades\Route;
 
@@ -22,3 +26,12 @@ require __DIR__.'/auth.php';
 
 Route::post('/meme',[MemeController::class,'upload']);
 Route::delete('/meme/{id}',[MemeController::class,'destroy']);
+
+
+
+Route::get('/profile',[ProfileController::class,'index']);
+Route::get('/profile/library',[LibraryController::class,'index']);
+Route::get('/create',[CreateController::class,'index']);
+Route::get('/profile/upload',[UploadController::class,'index']);
+
+
