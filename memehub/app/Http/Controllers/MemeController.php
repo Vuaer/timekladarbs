@@ -90,6 +90,50 @@ class MemeController extends Controller
     {
         //
     }
+    public function like(Request $request)
+    {
+        $id=$request->id;
+        if (session()->has('like') && in_array($id, session()->get('like')))
+        {
+            
+        }
+        else 
+        {
+            if(session()->has('dislike') && in_array($id, session()->get('dislike')))
+            {
+                session()->forget('dislike');
+            }
+            $meme= Meme::findOrFail($id);
+            $meme->likes++;
+            $meme->save();
+            $result=$meme->likes;
+            session()->put('like',$id);
+            return response()->json(['likes'=>$result,'isliked'=>0]);
+        }
+    }
+        public function dislike(Request $request)
+    {
+        $id=$request->id;            
+        if (session()->has('dislike') && in_array($id, session()->get('dislike')))
+        {
+            
+        }
+        else
+        {
+            if(session()->has('like') && in_array($id, session()->get('like')))
+            {
+                session()->forget('like');
+            }
+        $id=$request->id;
+        $meme= Meme::findOrFail($id);
+        $meme->dislikes++;
+        $meme->save();
+        $result=$meme->dislikes;
+        return response()->json(['dislikes'=>$result,'isdisliked'=>0]);
+        }
+    }
+    
+    
 
     /**
      * Remove the specified resource from storage.
