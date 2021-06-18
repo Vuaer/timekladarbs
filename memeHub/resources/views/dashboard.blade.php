@@ -22,46 +22,7 @@
                     @endif
                 </div>
                 <div class='card-body'>
-                    <div class='container mt-2'>
-                        <div class='row justify-content-center'>
-                        <div class='col-md-8'>
-                        @forelse($memes as $meme)
-                            <div class='card m-3 border border-primary'>
-                                <img src='{{ asset($meme->meme)}}' class="card-img-top" alt='something'>
-                                <div class='row align-items-center'>
-                                    <div class='col-8'>
-                                        <form>
-                                            <textarea rows="2"class='form-control' name='comment' id='comment' placeholder="leave a comment"></textarea>
-                                        </form>
-                                    </div>
-                                    <div class='col-4 d-inline-flex'>
-                                        <button class="btn" id="btn-like" memes-id="{{$meme->id}}"><i class="fa fa-thumbs-up"></i></button>
-                                        <button class="btn" id="btn-dislike" memes-id="{{$meme->id}}"><i class="fa fa-thumbs-down"></i></button>
-                                            <p id="likes">{{$meme->likes}}</p>
-                                            <p>space</p>
-                                            <p id="dislikes"> {{$meme->dislikes}}</p>                                          
-                                    </div>
-                                </div>
-                                <div class="card-">
-                                </div>
-                            </div>
-                        @if(Auth::check())
-                        @if($meme->user_id==Auth::user()->id)
-                        <div class="row justify-content-end">
-                            <form action='/meme/{{$meme->id}}' method="POST">
-                                @method('DELETE')
-                                @csrf
-                                <input type="submit" value="Delete" class="btn btn-danger">
-                            </form>
-                            
-                        </div>
-                        
-                        @endif
-                        @endif
-                        @empty
-                            <p>No memes!</p>
-                        @endforelse
-                        </div>
+                    
                         </div>
                     </div>
                     
