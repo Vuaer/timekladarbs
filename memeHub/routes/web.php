@@ -28,7 +28,6 @@ require __DIR__.'/auth.php';
 
 Route::post('/meme',[MemeController::class,'upload']);
 Route::delete('/meme/{id}',[MemeController::class,'destroy']);
-HEAD
 
 
 
@@ -41,4 +40,3 @@ Route::get('/profile/upload',[UploadController::class,'index']);
 
 Route::post('meme/like',[MemeController::class,'like'])->name("meme.like");
 Route::post('meme/dislike',[MemeController::class,'dislike'])->name("meme.dislike");
-stefan_database_patch1
