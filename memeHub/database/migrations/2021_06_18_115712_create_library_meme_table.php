@@ -18,7 +18,7 @@ class CreateLibraryMemeTable extends Migration
             $table->id();
             $table->timestamps();
             $table->foreignId('meme_id')->constrained('memes');
-            $table->foreignId('library_id')->constrained('library');
+            $table->foreignId('library_id')->constrained('libraries');
         });
     }
 
