@@ -10,7 +10,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
-use App\Models\Library;
 
 class RegisteredUserController extends Controller
 {
@@ -50,10 +49,6 @@ class RegisteredUserController extends Controller
 
         Auth::login($user);
 
-        $library = new Library;
-        $library->user_id = Auth::user()->id;
-        $library->save();
-
-        return redirect(RouteServiceProvider::HOME);
+        return redirect('/meme');
     }
 }
