@@ -9,11 +9,12 @@
     <div class='row justify-content-center'>
         <div class='col-md-10'>
             <div class="card">
-                        @if (true)
-                        <p> I have one record!</p>
-                                @pastetemplates(); 
-                        @endif
+                <ul class="thumbnails" style="width: 920px; margin: 0 auto;">
+                            <?php    
+                            @pastetemplates();
+                            ?>
 
+                </ul>
             </div>
         </div>
     </div>
@@ -23,11 +24,16 @@
 
 function pastetemplates() {
 $files = glob("memes/templates/*.*");
+echo '<li>';
 for ($i = 0; $i < count($files); $i++) {
     $image = $files[$i];
-    echo basename($image) . "<br />"; // show only image name if you want to show full path then use this code // echo $image."<br />";
-    echo '<img src="' . $image . '" alt="Random image" />' . "<br /><br />";
-
+    //echo basename($image) . "<br />"; // show only image name if you want to show full path then use this code // echo $image."<br />";
+    echo '<a href="/meme" title='. $i .'>';
+    echo '<img src="' . $image . '" class="rounded float-left" style= "width: 25%; height: 25%" alt="{{$i}}" />';
+    echo '</a>';
+    echo '</li>';
 }
-}
+ echo '</div>';
+ echo '<br />';
+}                                          
 ?>
