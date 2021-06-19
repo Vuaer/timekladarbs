@@ -13,6 +13,7 @@
                         echo '<p>';
                         echo ''. $id .'';
                         echo '</p>';
+                        findtemplate($id);
                        ?>
                    
             </div>
@@ -20,3 +21,24 @@
     </div>
 </div>
 </x-app-layout>
+<?php
+
+function findtemplate($id) {
+$files = glob("memes/templates/*.*");
+
+for ($i = 0; $i < count($files); $i++) {
+    $image = $files[$i];
+    //echo basename($image) . "<br />"; // show only image name if you want to show full path then use this code // echo $image."<br />";
+    if(basename($image)==$id)
+    {
+
+    echo '<img src="../' . $image . '" class="rounded float-left"  alt="found'.$id.'==' . $image . '" />';
+   
+
+    }
+}
+ echo '</div>';
+ echo '<br />';
+  
+}                                          
+?>

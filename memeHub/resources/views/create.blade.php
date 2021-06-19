@@ -29,7 +29,7 @@ for ($i = 0; $i < count($files); $i++) {
     $image = $files[$i];
     //echo basename($image) . "<br />"; // show only image name if you want to show full path then use this code // echo $image."<br />";
     echo '<li>';
-    echo '<a href="/create/'.$i.' " title="' . $i .'">';
+    echo '<a href="/create/'.basename($image).' " title="' . $i .'">';
     echo '<img src="' . $image . '" class="rounded float-left" style= "width: 25%; height: 25%" alt="image gen" />';
     echo '</a>';
     echo '</li>';
