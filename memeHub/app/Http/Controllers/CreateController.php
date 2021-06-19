@@ -21,11 +21,11 @@ class CreateController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($id)
     {
-        //
+        return view('creatememe',$id);
     }
-
+    
     /**
      * Store a newly created resource in storage.
      *

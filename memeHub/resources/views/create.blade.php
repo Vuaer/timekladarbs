@@ -28,9 +28,9 @@ echo '<li>';
 for ($i = 0; $i < count($files); $i++) {
     $image = $files[$i];
     //echo basename($image) . "<br />"; // show only image name if you want to show full path then use this code // echo $image."<br />";
-    echo '<a href="/meme" title='. $i .'>';
-    echo '<img src="' . $image . '" class="rounded float-left" style= "width: 25%; height: 25%" alt="{{$i}}" />';
-    echo '</a>';
+//    echo '<a href="/meme" title="' . $i .'">';
+    echo '<img src="' . $image . '" class="rounded float-left" style= "width: 25%; height: 25%" alt="{{$i}}" method="POST" action="{{action([App\Http\Controllers\TrackController::class,"create",'.$i.')}}" />';
+//    echo '</a>';
     echo '</li>';
 }
  echo '</div>';
