@@ -35,7 +35,7 @@ Route::get('/profile',[ProfileController::class,'index']);
 Route::get('/profile/library',[LibraryController::class,'index']);
 Route::get('/create',[CreateController::class,'index']);
 Route::get('/profile/upload',[UploadController::class,'index']);
-
+Route::get('/create/{id}',[CreateController::class,'create']);
 
 
 Route::post('meme/like',[MemeController::class,'like'])->name("meme.like");
