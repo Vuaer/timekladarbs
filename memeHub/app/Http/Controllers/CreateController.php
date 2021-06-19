@@ -23,7 +23,7 @@ class CreateController extends Controller
      */
     public function create($id)
     {
-        return view('creatememe',$id);
+        return view('creatememe',["id"=>$id]);
     }
     
     /**

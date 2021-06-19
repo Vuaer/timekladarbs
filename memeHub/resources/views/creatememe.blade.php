@@ -9,7 +9,12 @@
     <div class='row justify-content-center'>
         <div class='col-md-10'>
             <div class="card">
-     
+                      <?php    
+                        echo '<p>';
+                        echo ''. $id .'';
+                        echo '</p>';
+                       ?>
+                   
             </div>
         </div>
     </div>
