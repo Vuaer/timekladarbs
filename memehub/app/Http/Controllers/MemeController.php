@@ -6,7 +6,8 @@ use App\Models\Meme;
 use Auth;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-
+use App\Models\Library_meme;
+use App\Models\Library;
 
 
 class MemeController extends Controller
@@ -54,6 +55,12 @@ class MemeController extends Controller
         $upload->user_id=Auth::user()->id;
         $upload->meme='memes/'.$new_name;
         $upload->save();
+
+        $library = Library::where('user_id','=',Auth::user()->id)->get();
+        $library_meme = new Library_meme;
+        $library_meme->meme_id = $upload->id;
+        $library_meme->library_id =  $library->first()->id;
+        $library_meme->save();
         return redirect()->route('meme.index');
     }
 
@@ -143,6 +150,9 @@ class MemeController extends Controller
      */
     public function destroy($id)
     {
+        $library_meme = Library_meme::where('meme_id','=',$id)->get();
+        $library_meme->first()->delete();
+        
         Meme::findOrFail($id)->delete();
         return redirect()->route('meme.index');
     }

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateLibraryMemeTable extends Migration
+class CreateLibraryMemesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,7 @@ class CreateLibraryMemeTable extends Migration
      */
     public function up()
     {
-        Schema::create('library_meme', function (Blueprint $table) {
-            $table->engine = 'InnoDB';
+        Schema::create('library_memes', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
             $table->foreignId('meme_id')->constrained('memes');
@@ -29,6 +28,6 @@ class CreateLibraryMemeTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('library_meme');
+        Schema::dropIfExists('library_memes');
     }
 }
