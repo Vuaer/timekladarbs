@@ -7,7 +7,7 @@
 </x-slot>
 <div class='container'>
     <div class='row justify-content-center'>
-        <div class='col-md-10'>
+        <div class='col-md-10'> 
             <div class="card-header">
                     <h4>Upload meme</h4>
                     @if(Auth::check())

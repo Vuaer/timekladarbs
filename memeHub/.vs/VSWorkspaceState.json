@@ -4,14 +4,14 @@
     "\\app",
     "\\app\\Http",
     "\\app\\Http\\Controllers",
-    "\\database",
-    "\\database\\migrations",
+    "\\app\\Http\\Controllers\\Auth",
+    "\\app\\Models",
     "\\resources",
     "\\resources\\views",
     "\\resources\\views\\layouts",
     "\\routes",
     "\\storage"
   ],
-  "SelectedNode": "\\database",
+  "SelectedNode": "\\app\\Http\\Controllers\\ProfileController.php",
   "PreviewInSolutionExplorer": false
 }

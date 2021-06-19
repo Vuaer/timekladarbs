@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Auth;
 
 class CreateController extends Controller
 {
@@ -11,6 +12,10 @@ class CreateController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function __construct(){
+        $this->middleware('auth');
+    }
+
     public function index()
     {
         return view('create');
