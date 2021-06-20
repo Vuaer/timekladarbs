@@ -15,9 +15,12 @@
                         echo '<p>';
                         echo ''. $id .'';
                         echo '</p>';                        
+                        findtemplate($id);
                         ?>
                      <form action="foobar_submit.php" method="get">
-                           <input type="text" name="subject" id="subject" value="your text">
+                           <input type="text" name="subject" id="text1" value="your text">
+                           <input type="text" name="subject" id="text2" value="your text">
+                           <input type="file" value="<?php echo postresult($id,"first text","second text","location1","location2")?>">
                            <input type="submit" name="my_form_submit_button" 
                                   value="add you text"/>
 
@@ -25,19 +28,11 @@
                        <?php    
                         
                         echo '<p>';
-                        postresult($id);
+                        postresult($id,"first text","second text","location1","location2");
                         echo '</p>';                        
                         ?>
-                    @if(Auth::check())
-                        @csrf
-                        <button>
-                            
-<!--                        <button  action='/meme'  type='file' name='meme' class="form-control-image" value="{$img}" >
-                           press me
-                        <button/>-->
 
-                    @endif                        
-                    
+
             </div>
         </div>
     </div>
@@ -65,9 +60,9 @@ for ($i = 0; $i < count($files); $i++) {
  echo '<br />';
   
 }              
-function postresult($id)
+function postresult($id,$text1,$text2,$location1,$location2)
 {
-    findtemplate($id);
+   
                         // (A) OPEN IMAGE
                         $imgPath = 'memes/templates/'.$id.'';
                        
@@ -76,17 +71,17 @@ function postresult($id)
 
                         // (B) WRITE TEXT
                         $white = imagecolorallocate($img, 0xFF, 0xFF, 0xFF);
-                        $txt = "in funcion";
                         $font = "C:\Windows\Fonts\arial.ttf"; 
-                        imagettftext($img, 24, 0, 5, 24, $white, $font, $txt);
-
+                        imagettftext($img, 24, 0, 5, 24, $white, $font, $text1);
+                        imagettftext($img, 24, 0, 5, 224, $white, $font, $text2);
                         // (C) OUTPUT IMAGE
                      header('Content-Type: image/jpeg');
                      
-//                         imagedestroy($img);
-//
-//                        // OR SAVE TO A FILE
                         // THE LAST PARAMETER IS THE QUALITY FROM 0 to 100
-                        imagejpeg($img, "18_06.jpg", 100); 
+                        $time = time();
+                        $templatedonelink = "memes/templatesDone/$time.jpg";
+                        //imagejpeg($img, $templatedonelink, 100);
+                        imagedestroy($img);
+                        return $templatedonelink;
 }
 ?>
