@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\Meme;
 use Illuminate\Http\Request;
 use auth;
 
@@ -17,8 +17,8 @@ class LibraryController extends Controller
     }
     public function index()
     {
-
-        return view('library');
+        $memes=Meme::orderBy('id','DESC')->get();
+        return view('library', compact('memes'));
 
     }
 
@@ -49,9 +49,10 @@ class LibraryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function showmymemes()
     {
-        //
+        $memes=Meme::orderBy('id','DESC')->get();
+        return view('library', compact('memes'));
     }
 
     /**

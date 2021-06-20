@@ -14,6 +14,9 @@
              <x-nav-link href="/profile/library" :active="request()->routeIs('LibraryController.index')">
                         {{ __('Library') }}
              </x-nav-link>
+             <x-nav-link href="/profile/mymemes" :active="request()->routeIs('LibraryController.showmymemes')">
+                        {{ __('My memes') }}
+             </x-nav-link>
         </div>
     </div>
 </div>
