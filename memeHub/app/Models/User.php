@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use App\Models\Meme;
+use App\Models\Like;
+use App\Models\Dislike;
 
 class User extends Authenticatable
 {
@@ -43,5 +45,13 @@ class User extends Authenticatable
     ];
     public function memes(){
         return $this->hasMany(Meme::class);
+    }
+    public function likes()
+    {
+        return $this->hasMany(Like::class);
+    }
+    public function dislikes()
+    {
+        return $this->hasMany(Dislike::class);
     }
 }
