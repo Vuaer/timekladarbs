@@ -129,5 +129,5 @@ function a(meme_id, like)
         }
     });
 }      
-    </script> 
+    </script>
 </x-app-layout>
