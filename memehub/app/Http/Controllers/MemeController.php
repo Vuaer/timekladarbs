@@ -154,8 +154,13 @@ class MemeController extends Controller
     {
         $library_meme = Library_meme::where('meme_id','=',$id)->get();
         $library_meme->first()->delete();
-        
-        Meme::findOrFail($id)->delete();
+
+        $meme = Meme::findOrFail($id);
+        foreach($meme->comments as $comment)
+        {
+            $comment->delete();
+        }
+        $meme->delete();
         return redirect()->route('meme.index');
     }
 }
