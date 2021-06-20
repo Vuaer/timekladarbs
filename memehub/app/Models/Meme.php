@@ -10,7 +10,6 @@ use App\Models\Comment;
 
 use App\Models\Like;
 use App\Models\Dislike;
-likes_copy
 
 class Meme extends Model
 {
@@ -21,7 +20,7 @@ class Meme extends Model
 
     public function comments(){
         return $this->hasMany(Comment::class);
-
+    }
     public function likes()
     {
         return $this->hasMany(Like::class);
@@ -29,6 +28,5 @@ class Meme extends Model
     public function dislikes()
     {
         return $this->hasMany(Dislike::class);
-likes_copy
     }
 }
