@@ -42,7 +42,7 @@ class CommentController extends Controller
     {
         $rules = array
                 (
-                    'comment_text' => 'required | text | min:1 | max:500',
+                    'comment_text' => 'required | string | min:1 | max:500',
                 );
         $this->validate($request,$rules);
 
@@ -50,10 +50,10 @@ class CommentController extends Controller
         $comment->comment_text = $request->comment_text;
         $comment->likes = 0;
         $comment->dislikes = 0;
-        $comment->user_id = $request->user_id;
+        $comment->user_id = Auth::user()->id;
         $comment->meme_id = $request->meme_id;
         $comment->save();
-        return redirect('/')
+        return redirect('/meme/'.$comment->meme_id);
     }
 
     /**

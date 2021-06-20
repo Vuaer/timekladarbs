@@ -5,6 +5,7 @@ use App\Http\Controllers\CreateController;
 use App\Http\Controllers\LibraryController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\MemeController;
+use App\Http\Controllers\CommentController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -36,6 +37,9 @@ Route::get('/profile/library',[LibraryController::class,'index']);
 Route::get('/create',[CreateController::class,'index']);
 Route::get('/profile/upload',[UploadController::class,'index']);
 Route::get('/create/{id}',[CreateController::class,'create']);
+
+Route::get('/meme/{id}',[MemeController::class,'show']);
+Route::resource('comment',CommentController::class);
 
 
 Route::post('meme/like',[MemeController::class,'like'])->name("meme.like");

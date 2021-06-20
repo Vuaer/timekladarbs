@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Meme;
+use App\Models\Comment;
 use Auth;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -18,7 +19,7 @@ class MemeController extends Controller
      * @return Response
      */
     public function __construct(){
-        $this->middleware('auth',['except'=>'index']);
+        $this->middleware('auth',['except'=>['index','show']]);
     }
     
     public function index()
@@ -72,7 +73,8 @@ class MemeController extends Controller
      */
     public function show($id)
     {
-        //
+        $meme = Meme::findOrFail($id);
+        return view('show',compact('meme'));
     }
 
     /**

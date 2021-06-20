@@ -12,9 +12,14 @@
                         <div class='row justify-content-center'>
                         <div class='col-md-8'>
                         @forelse($memes as $meme)
+                        <a href="/meme/{{$meme->id}}" target="_blank">
                             <div class='card m-3 bg-dark'>
-                                <img src='{{ asset($meme->meme)}}' class="card-img-top pb-5 " alt='something'>
+                                
+                                <img src='{{ asset($meme->meme)}}' class="card-img-top pb-5 " alt='something' >
                             </div>
+                        <div class="row justify-content-begin form-group">
+                            <h6 class="btn btn-warning">Add comment</h6>
+                        </div>
                         @if(Auth::check())
                         @if($meme->user_id==Auth::user()->id)
                         <div class="row justify-content-end">
@@ -74,5 +79,5 @@ $(document).ready(function () {
         });
     })  
 });        
-    </script> 
+    </script>
 </x-app-layout>
