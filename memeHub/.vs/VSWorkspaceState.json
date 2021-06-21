@@ -2,10 +2,9 @@
   "ExpandedNodes": [
     "",
     "\\app",
-    "\\app\\Http",
-    "\\app\\Http\\Controllers",
+    "\\app\\Filters",
+    "\\app\\Models",
     "\\database",
-    "\\database\\migrations",
     "\\resources",
     "\\resources\\views",
     "\\resources\\views\\layouts",

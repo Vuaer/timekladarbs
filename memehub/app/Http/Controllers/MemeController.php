@@ -167,4 +167,14 @@ class MemeController extends Controller
         }
         return redirect()->route('meme.index');
     }
+
+    public function indexfilter(ProductFilter $request)
+    {
+        $memes=Meme::filer($request);
+        return view('dashboard', compact('memes'));
+    }
+
+
+
+
 }

@@ -6,7 +6,17 @@
     <div class='row justify-content-center'>
         <div class='col-md-10'>
             <div class="card">
-               
+            <form action="{{route('memes')}}" method="get">
+                <div class="mb-3">
+                    <div class="form-label">Choose category</div>
+                    <select name="category_id" class="form-select form-select-sm" aria-label=".form-select-sm example">
+                        <option></option> 
+                        <option value="{{$memes->id}}"</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+
                 <div class='card-body'>
                     <div class='container mt-2'>
                         <div class='row justify-content-center'>

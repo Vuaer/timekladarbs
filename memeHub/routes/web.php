@@ -46,3 +46,5 @@ Route::resource('comment',CommentController::class);
 
 Route::post('meme/like',[MemeController::class,'like'])->name("meme.like");
 Route::post('meme/dislike',[MemeController::class,'dislike'])->name("meme.dislike");
+
+Route::get('/',[\App\Http\Controllers\MemeController::class, 'indexfilter'])->name('memes');

@@ -16,4 +16,9 @@ class Meme extends Model
     public function comments(){
         return $this->hasMany(Comment::class);
     }
+
+        public function scopeFilter(Builder $builder, QueryFilter $filter)
+    {
+        return $filter->apply($builder);
+    }
 }
