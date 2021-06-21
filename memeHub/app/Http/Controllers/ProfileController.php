@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use auth;
+use Illuminate\Support\Facades\Gate;
+use App\Models\User;
 
 class ProfileController extends Controller
 {
@@ -15,9 +17,34 @@ class ProfileController extends Controller
     public function __construct(){
         $this->middleware('auth');
     }
-    public function index()
+    public function index(Request $request)
     {
+        if(Gate::allows('is-moder'))
+        {
+            if($request->has('name') & $request->name != NULL)
+            {
+                $users = User::Where('name','LIKE','%'.$request->name.'%')->orderBy("name","asc")->get();
+                $moderators = User::where('role','=','moderator')->get();
+                $administrators = User::where('role','=','administrator')->get();
+                return view('profile',compact('moderators','administrators','users'));
+            }
+            else
+            {
+                $moderators = User::where('role','=','moderator')->get();
+                $administrators = User::where('role','=','administrator')->get();
+                return view('profile',compact('moderators','administrators'));
+            }
+        }
+        else
+        {
         return view('profile');
+        }
+    }
+
+    public function findUser($id)
+    {
+        $user = User::findOrFail($id);
+        return view('changerole',compact('user'));
     }
 
     /**

@@ -44,4 +44,14 @@ class User extends Authenticatable
     public function memes(){
         return $this->hasMany(Meme::class);
     }
+
+    public function isModer()
+    {
+        return ($this->role == 'moderator' || $this->role == 'administrator');
+    }
+
+    public function isAdmin()
+    {
+        return ($this->role == 'administrator');
+    }
 }

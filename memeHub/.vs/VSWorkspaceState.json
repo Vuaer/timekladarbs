@@ -2,7 +2,8 @@
   "ExpandedNodes": [
     "",
     "\\app",
-    "\\app\\Models",
+    "\\app\\Http",
+    "\\app\\Http\\Controllers",
     "\\database",
     "\\database\\migrations",
     "\\resources",
@@ -11,6 +12,6 @@
     "\\routes",
     "\\storage"
   ],
-  "SelectedNode": "\\resources\\views\\show.blade.php",
+  "SelectedNode": "\\app\\Http\\Controllers\\MemeController.php",
   "PreviewInSolutionExplorer": false
 }

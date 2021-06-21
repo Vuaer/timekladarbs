@@ -21,7 +21,7 @@
                             <h6 class="btn btn-warning">Add comment</h6>
                         </div>
                         @if(Auth::check())
-                        @if($meme->user_id==Auth::user()->id)
+                        @if($meme->user_id==Auth::user()->id || Auth::user()->isModer())
                         <div class="row justify-content-end">
                             <form action='/meme/{{$meme->id}}' method="POST">
                                 @method('DELETE')

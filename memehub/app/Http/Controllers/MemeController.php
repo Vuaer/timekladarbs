@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use App\Models\Library_meme;
 use App\Models\Library;
+use Illuminate\Support\Facades\Gate;
 
 
 class MemeController extends Controller
@@ -152,15 +153,18 @@ class MemeController extends Controller
      */
     public function destroy($id)
     {
-        $library_meme = Library_meme::where('meme_id','=',$id)->get();
-        $library_meme->first()->delete();
-
         $meme = Meme::findOrFail($id);
-        foreach($meme->comments as $comment)
+        if (Gate::allows('is-moder') || Auth::user()->id == $meme->user_id)
         {
-            $comment->delete();
+            $library_meme = Library_meme::where('meme_id','=',$id)->get();
+            $library_meme->first()->delete();
+
+            foreach($meme->comments as $comment)
+            {
+                $comment->delete();
+            }
+            $meme->delete();
         }
-        $meme->delete();
         return redirect()->route('meme.index');
     }
 }
