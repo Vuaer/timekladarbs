@@ -72,12 +72,6 @@ class MemeController extends Controller
         $upload->user_id=Auth::user()->id;
         $upload->meme='memes/'.$new_name;
         $upload->save();
-
-        $library = Library::where('user_id','=',Auth::user()->id)->get();
-        $library_meme = new Library_meme;
-        $library_meme->meme_id = $upload->id;
-        $library_meme->library_id =  $library->first()->id;
-        $library_meme->save();
         return redirect()->route('meme.index');
     }
 
