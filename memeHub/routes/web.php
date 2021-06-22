@@ -33,7 +33,9 @@ Route::delete('/meme/{id}',[MemeController::class,'destroy']);
 
 
 Route::get('/profile',[ProfileController::class,'index']);
-Route::get('/changerole/{$id}',[ProfileController::class,'findUser']);
+Route::get('/findUser/{id}',[ProfileController::class,'findUser']);
+Route::post('/changerole/{id}',[ProfileController::class,'changeRole']);
+
 Route::get('/profile/library',[LibraryController::class,'index']);
 Route::get('/create',[CreateController::class,'index']);
 Route::get('/profile/upload',[UploadController::class,'index']);
