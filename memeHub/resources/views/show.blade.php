@@ -14,7 +14,7 @@
                                 <img src='{{ asset($meme->meme)}}' class="card-img-top pb-5 " alt='something' >
                             </div>
                         @if(Auth::check())
-                        @if($meme->user_id==Auth::user()->id)
+                        @if($meme->user_id==Auth::user()->id || Auth::user()->isModer())
                         <div class="row justify-content-end">
                             <form action='/meme/{{$meme->id}}' method="POST">
                                 @method('DELETE')
