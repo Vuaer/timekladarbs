@@ -181,8 +181,6 @@ class MemeController extends Controller
         $meme = Meme::findOrFail($id);
         if (Gate::allows('is-moder') || Auth::user()->id == $meme->user_id)
         {
-            $library_meme = Library_meme::where('meme_id','=',$id)->get();
-            $library_meme->first()->delete();
 
             foreach($meme->comments as $comment)
             {
