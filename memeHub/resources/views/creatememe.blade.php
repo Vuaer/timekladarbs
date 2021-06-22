@@ -68,21 +68,24 @@ function postresult($id,$text1,$text2,$location1,$location2)
                        
                         global $img;
                         $img = imagecreatefromjpeg($imgPath);
-                        echo ($img);
+                        
                         // (B) WRITE TEXT
                         $white = imagecolorallocate($img, 0xFF, 0xFF, 0xFF);
                         $font = "C:\Windows\Fonts\arial.ttf"; 
                         imagettftext($img, 24, 0, 5, 24, $white, $font, $text1);
                         imagettftext($img, 24, 0, 5, 224, $white, $font, $text2);
 
-                        echo ($img);
+                       
                         // (C) OUTPUT IMAGE
                      header('Content-Type: image/jpeg');
                      
                         // THE LAST PARAMETER IS THE QUALITY FROM 0 to 100
                         $time = time();
                         $templatedonelink = "memes/templatesDone/$time.jpg";
-                        //imagejpeg($img, $templatedonelink, 100);
+                        
+                        imagejpeg($img, $templatedonelink, 100);
+                        //imagejpeg($img);
+                        //echo ($img);
                         imagedestroy($img);
                         return $templatedonelink;
 }
