@@ -178,6 +178,10 @@ class MemeController extends Controller
     public function destroy($id)
     {
         $meme = Meme::findOrFail($id);
+        foreach($meme->comments as $comment)
+        {
+            $comment->delete();
+        }
         $meme->delete();
         return redirect()->route('meme.index');
     }

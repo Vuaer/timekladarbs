@@ -29,14 +29,15 @@
                         <div class='row justify-content-center'>
                         <div class='col-md-8'>
                         @foreach($memes as $meme)
+                            
                             <div class='card m-3 border border-primary'>
+                                <a href="/meme/{{$meme->id}}" target="_blank">
                                 <img src='{{ asset($meme->meme)}}' class="card-img-top" alt='something'>
                                 <div class='row align-items-center'>
                                     <div class='col-8'>
-                                        <form>
-                                            <textarea rows="2"class='form-control' name='comment' id='comment' placeholder="leave a comment"></textarea>
-                                        </form>
+                                            <h6 class="btn btn-warning">Add comment</h6>
                                     </div>
+                                    </a>
                                     <div class='col-4'>
                                         <div class="row">
                                         @if(Auth::check())
@@ -62,9 +63,6 @@
                                     </div>
                                 </div>
                             </div>
-                        <div class="row justify-content-begin form-group">
-                            <h6 class="btn btn-warning">Add comment</h6>
-                        </div>
 
                         @if(Auth::check())
                         @if($meme->user_id==Auth::user()->id)
