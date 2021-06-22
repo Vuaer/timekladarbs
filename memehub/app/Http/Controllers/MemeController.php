@@ -3,7 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Meme;
+
 use App\Models\Comment;
+
+use App\Models\Like;
+use App\Models\Dislike;
+
 use Auth;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -26,7 +31,18 @@ class MemeController extends Controller
     public function index()
     {
         $memes=Meme::orderBy('id','DESC')->get();
-        return view('dashboard', compact('memes'));
+        if(Auth::check())
+        {
+            $liked_memes_ids=Like::where('user_id','=',Auth::user()->id)->pluck('meme_id')->toArray();
+            $disliked_memes_ids=Dislike::where('user_id','=',Auth::user()->id)->pluck('meme_id')->toArray();
+            return view('dashboard',compact('memes','liked_memes_ids','disliked_memes_ids'));
+        }
+        else
+        {
+           $liked_memes_ids=array();
+           $disliked_memes_ids=array();
+           return view('dashboard', compact('memes','liked_memes_ids','disliked_memes_ids')); 
+        }
     }
 
     /**
@@ -57,12 +73,6 @@ class MemeController extends Controller
         $upload->user_id=Auth::user()->id;
         $upload->meme='memes/'.$new_name;
         $upload->save();
-
-        $library = Library::where('user_id','=',Auth::user()->id)->get();
-        $library_meme = new Library_meme;
-        $library_meme->meme_id = $upload->id;
-        $library_meme->library_id =  $library->first()->id;
-        $library_meme->save();
         return redirect()->route('meme.index');
     }
 
@@ -103,43 +113,58 @@ class MemeController extends Controller
     public function like(Request $request)
     {
         $id=$request->id;
-        if (session()->has('like') && in_array($id, session()->get('like')))
+        $meme= Meme::findOrFail($id);
+        if (Like::where('user_id','=',Auth::user()->id)->where('meme_id','=',$id)->exists())
         {
-            
+          $meme->likes--;
+          $meme->save();
+          Like::where('user_id','=',Auth::user()->id)->where('meme_id','=',$id)->delete();
+          return response()->json(['likes'=>$meme->likes,'isliked'=>1]);  
         }
         else 
         {
-            if(session()->has('dislike') && in_array($id, session()->get('dislike')))
+            if(Dislike::where('user_id','=',Auth::user()->id)->where('meme_id','=',$id)->exists())
             {
-                session()->forget('dislike');
+                $meme->dislikes--;
+                Dislike::where('user_id','=',Auth::user()->id)->where('meme_id','=',$id)->delete();
             }
-            $meme= Meme::findOrFail($id);
             $meme->likes++;
             $meme->save();
-            $result=$meme->likes;
-            session()->put('like',$id);
-            return response()->json(['likes'=>$result,'isliked'=>0]);
+            $likes=$meme->likes;
+            $like=new Like;
+            $like->user_id=Auth::user()->id;
+            $like->meme_id=$meme->id;
+            $like->save();
+            return response()->json(['likes'=>$likes,'dislikes'=>$meme->dislikes,'isliked'=>0]);
         }
     }
         public function dislike(Request $request)
     {
-        $id=$request->id;            
-        if (session()->has('dislike') && in_array($id, session()->get('dislike')))
+        $id=$request->id;
+        $meme= Meme::findOrFail($id);
+        if (Dislike::where('user_id','=',Auth::user()->id)->where('meme_id','=',$id)->exists())
         {
-            
+           Dislike::where('user_id','=',Auth::user()->id)->where('meme_id','=',$id)->delete();
+           $meme->dislikes--;
+           $meme->save();
+           
+           return response()->json(['dislikes'=>$meme->dislikes,'isdisliked'=>1]); 
         }
         else
         {
-            if(session()->has('like') && in_array($id, session()->get('like')))
-            {
-                session()->forget('like');
-            }
-        $id=$request->id;
-        $meme= Meme::findOrFail($id);
+        if(Like::where('user_id','=',Auth::user()->id)->where('meme_id','=',$id)->exists())
+        {
+            Like::where('user_id','=',Auth::user()->id)->where('meme_id','=',$id)->delete();
+            $meme->likes--;
+        }
         $meme->dislikes++;
         $meme->save();
-        $result=$meme->dislikes;
-        return response()->json(['dislikes'=>$result,'isdisliked'=>0]);
+        $dislikes=$meme->dislikes;
+        $dislike=new Dislike;
+        $dislike->user_id=Auth::user()->id;
+        $dislike->meme_id=$meme->id;
+        $dislike->save();
+        return response()->json(['dislikes'=>$dislikes,'likes'=>$meme->likes,'isdisliked'=>0]);
         }
     }
     
