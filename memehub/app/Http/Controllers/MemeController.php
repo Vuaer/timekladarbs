@@ -204,7 +204,7 @@ class MemeController extends Controller
     public function search(Request $request)
     {
         $memes_ids=Keyword::where('keyword','like','%'.$request->keyword.'%')->pluck('meme_id')->toArray();
-        $memes=DB::table('memes')->whereIn('id',$memes_ids)->get();
+        $memes=DB::table('memes')->whereIn('id',$memes_ids)->paginate(5);
         if(Auth::check())
         {
             $liked_memes_ids=Like::where('user_id','=',Auth::user()->id)->pluck('meme_id')->toArray();
