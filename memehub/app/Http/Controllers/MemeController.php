@@ -189,7 +189,7 @@ class MemeController extends Controller
     public function destroy($id)
     {
         $meme = Meme::findOrFail($id);
-        if (Gate::allows('is-moder') || Auth::user()->id == $meme->user_id)
+        if (auth()->user()->can('delete',$meme))
         {
 
             foreach($meme->comments as $comment)

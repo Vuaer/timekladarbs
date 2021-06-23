@@ -48,7 +48,7 @@
     @isset($users)
     <div>
         @foreach($users as $user)
-        <form action='/changerole/{{$user->id}}' method="get">
+        <form method="GET" action="{{ action([App\Http\Controllers\ProfileController::class, 'findUser'], $user->id) }}">
         @csrf
         <p>
         <input type="submit" value="{{$user->name}}">

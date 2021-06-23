@@ -3,6 +3,8 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use App\Models\Meme;
+use App\Models\User;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -11,6 +13,10 @@ class AppServiceProvider extends ServiceProvider
      *
      * @return void
      */
+    protected $policies =
+    [
+        Meme::class => MemePolicy::class
+    ];
     public function register()
     {
         //

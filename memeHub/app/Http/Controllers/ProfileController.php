@@ -43,10 +43,22 @@ class ProfileController extends Controller
 
     public function findUser($id)
     {
-        $user = User::findOrFail($id);
-        return view('changerole',compact('user'));
+        if(Gate::allows('is-admin'))
+        {
+            $user = User::findOrFail($id);
+            return view('changerole',compact('user'));
+        }
     }
-
+    public function changeRole(Request $request,$id)
+    {
+        if(Gate::allows('is-admin'))
+        {
+            $user = User::findOrFail($id);
+            $user->role = $request->role;
+            $user->save();
+        }
+        return redirect('profile');
+    }
     /**
      * Show the form for creating a new resource.
      *
