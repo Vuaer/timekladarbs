@@ -31,7 +31,7 @@ class MemeController extends Controller
     
     public function index()
     {
-        $memes=Meme::orderBy('id','DESC')->get();
+        $memes=Meme::orderBy('id','DESC')->paginate(5);
         if(Auth::check())
         {
             $liked_memes_ids=Like::where('user_id','=',Auth::user()->id)->pluck('meme_id')->toArray();

@@ -87,7 +87,9 @@
                         </div>
                         </div>
                     </div>
-                    
+                    <div class="row justify-content-center">
+                        {{$memes->links("pagination::bootstrap-4")}}
+                    </div> 
                 </div>
             </div>
         </div>
