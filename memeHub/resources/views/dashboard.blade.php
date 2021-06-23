@@ -15,7 +15,13 @@
                     <form action='/meme' enctype="multipart/form-data" method="POST" class='form-inline'>
                         @csrf
                         <div class='form-group'>
-                            <input type='file' name='meme' class="form-control-image">
+                            <input type='file' name='meme' class="form-control-image mb-3">
+                        </div>
+                        <div class='form-group col'>
+                            <div id="toAppend">
+                                <input type='text' id="keyword" name='keyword' placeholder="Enter keyword" class="form-control input-sm mb-3 mr-2">
+                            </div>
+                            <button type="button" class="btn btn-light" id="btn-add" onclick="newform()"><i class="fa fa-plus"></i></button>
                         </div>
                         <input type='submit' value="Upload" class="btn btn-primary">
                     </form>
@@ -126,6 +132,13 @@ function a(meme_id, like)
             console.log('Error:',data);
         }
     });
-}      
+}
+var number=0;
+function newform(){
+    $("#keyword").clone().attr("name","keyword"+number).appendTo("#toAppend");
+    console.log("keyword"+number);
+    number++;
+    //var copy=$("#keyword");
+}
     </script>
 </x-app-layout>

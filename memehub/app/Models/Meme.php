@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\User;
 
 use App\Models\Comment;
-
+use App\Models\Meme_keyword;
 use App\Models\Like;
 use App\Models\Dislike;
 
@@ -29,5 +29,9 @@ class Meme extends Model
     public function dislikes()
     {
         return $this->hasMany(Dislike::class);
+    }
+    public function keywords()
+    {
+        return $this->hasMany(Keyword::class);
     }
 }

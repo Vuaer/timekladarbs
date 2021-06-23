@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
+
 use App\Models\Meme;
 
 use App\Models\Comment;
-
+use App\Models\Keyword;
 use App\Models\Like;
 use App\Models\Dislike;
 
@@ -15,7 +16,7 @@ use Illuminate\Http\Response;
 use App\Models\Library_meme;
 use App\Models\Library;
 use Illuminate\Support\Facades\Gate;
-
+use Illuminate\Support\Facades\DB;
 
 class MemeController extends Controller
 {
@@ -25,7 +26,7 @@ class MemeController extends Controller
      * @return Response
      */
     public function __construct(){
-        $this->middleware('auth',['except'=>['index','show']]);
+        $this->middleware('auth',['except'=>['index','show','search']]);
     }
     
     public function index()
@@ -73,6 +74,13 @@ class MemeController extends Controller
         $upload->user_id=Auth::user()->id;
         $upload->meme='memes/'.$new_name;
         $upload->save();
+        $keywords=$request->except('meme');
+        foreach ($keywords as $value){
+            $keyword=new Keyword;
+            $keyword->keyword=$value;
+            $keyword->meme_id=$upload->id;
+            $keyword->save();
+        }
         return redirect()->route('meme.index');
     }
 
@@ -85,7 +93,9 @@ class MemeController extends Controller
     public function show($id)
     {
         $meme = Meme::findOrFail($id);
-        return view('show',compact('meme'));
+        Like::where('user_id','=',Auth::user()->id)->where('meme_id','=',$id)->exists()?$isliked=1:$isliked=0;
+        Dislike::where('user_id','=',Auth::user()->id)->where('meme_id','=',$id)->exists()?$isdisliked=1:$isdisliked=0;
+        return view('show',compact('meme','isliked','isdisliked'));
     }
 
     /**
@@ -189,5 +199,23 @@ class MemeController extends Controller
             $meme->delete();
         }
         return redirect()->route('meme.index');
+    }
+    
+    public function search(Request $request)
+    {
+        $memes_ids=Keyword::where('keyword','like','%'.$request->keyword.'%')->pluck('meme_id')->toArray();
+        $memes=DB::table('memes')->whereIn('id',$memes_ids)->get();
+        if(Auth::check())
+        {
+            $liked_memes_ids=Like::where('user_id','=',Auth::user()->id)->pluck('meme_id')->toArray();
+            $disliked_memes_ids=Dislike::where('user_id','=',Auth::user()->id)->pluck('meme_id')->toArray();
+            return view('dashboard',compact('memes','liked_memes_ids','disliked_memes_ids'));
+        }
+        else
+        {
+           $liked_memes_ids=array();
+           $disliked_memes_ids=array();
+           return view('dashboard', compact('memes','liked_memes_ids','disliked_memes_ids')); 
+        }
     }
 }

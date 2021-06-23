@@ -29,6 +29,7 @@ require __DIR__.'/auth.php';
 
 Route::post('/meme',[MemeController::class,'upload']);
 Route::delete('/meme/{id}',[MemeController::class,'destroy']);
+Route::get('/search',[MemeController::class,'search'])->name("meme.search");
 
 
 
@@ -42,7 +43,6 @@ Route::get('/profile/mymemes',[LibraryController::class,'showmymemes']);
 
 Route::get('/meme/{id}',[MemeController::class,'show']);
 Route::resource('comment',CommentController::class);
-
 
 Route::post('meme/like',[MemeController::class,'like'])->name("meme.like");
 Route::post('meme/dislike',[MemeController::class,'dislike'])->name("meme.dislike");

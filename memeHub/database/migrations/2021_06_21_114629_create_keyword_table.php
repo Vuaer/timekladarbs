@@ -16,8 +16,9 @@ class CreateKeywordTable extends Migration
         Schema::create('keywords', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->string('keyword')->unique();
- 
+            $table->string('keyword');
+            $table->foreignId('meme_id')->references('id')->on('memes')->onDelete('cascade');
+            $table->index(['keyword','meme_id']);
         });
     }
 

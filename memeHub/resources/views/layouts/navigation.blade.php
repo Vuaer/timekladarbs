@@ -29,8 +29,11 @@
                 </div>
             </div>
             <div class="flex mt-9">
-                    <x-input  type="text" name="search" required/>
-                    <x-button type="submit">Search</x-button>
+                <form method="GET" action="{{route('meme.search')}}">
+                    @csrf
+                    <input  type="text" name="keyword" required/>
+                    <x-button type="submit"><i class='fa fa-search'></i></x-button>
+                </form>
             </div>
 
             <!-- Settings Dropdown -->
