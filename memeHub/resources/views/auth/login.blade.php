@@ -1,4 +1,5 @@
 <x-guest-layout>
+    <link rel="stylesheet" href="{{asset('font-awesome-4.7.0/css/font-awesome.min.css')}}">
     <x-auth-card>
         <x-slot name="logo">
             <a href="/">
@@ -66,5 +67,9 @@
                 </x-button>
             </div>
         </form>
+        <div class="row">
+            <a href="{{route('login.google')}}" class="btn btn-block"><i class="fa fa-google"></i></a>
+            <a href="{{route('login.facebook')}}" class="btn btn-block"><i class="fa fa-facebook"></i></a>
+        </div>
     </x-auth-card>
 </x-guest-layout>
