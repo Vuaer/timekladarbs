@@ -46,7 +46,9 @@ Route::get('/profile/library',[LibraryController::class,'index']);
 Route::get('/create',[CreateController::class,'index']);
 Route::get('/profile/upload',[UploadController::class,'index']);
 Route::get('/create/{id}',[CreateController::class,'create']);
-Route::post('/create/meme',[CreateController::class,'upload']);
+
+Route::post('/create/meme',[CreateController::class,'upload'])->name("meme.create");
+
 Route::get('/profile/mymemes',[LibraryController::class,'showmymemes']);
 
 Route::get('/meme/{id}',[MemeController::class,'show']);

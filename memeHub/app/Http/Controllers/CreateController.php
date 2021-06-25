@@ -1,8 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\Template;
 use Illuminate\Http\Request;
+use App\Models\Meme;
 use Auth;
 
 class CreateController extends Controller
@@ -39,7 +40,43 @@ class CreateController extends Controller
      */
     public function upload(Request $request)
     {
-        return (riderect('/'));
+       $template = Template::findOrFail(1);
+       $id = $request->img;
+       $txt1= $request->textinput1;
+       $txt2= $request->textinput2;
+       $name = $request->imgname;
+     //  function postresult($id,$text1,$text2,$location1,$location2)
+    // (A) OPEN IMAGE
+        $imgPath = 'memes/templates/'.$id.'';
+        
+        $x1= $template->positionx1;
+        $x2= $template->positionx2;
+        $y1= $template->positiony1;
+        $y2= $template->positiony2;
+       // return $x2;
+        $img = imagecreatefromjpeg($imgPath);
+        $white = imagecolorallocate($img, 0xFF, 0xFF, 0xFF);
+        $font = "C:\Windows\Fonts\arial.ttf"; 
+        imagettftext($img, 32, 0, $x1, $y1, $white, $font, $txt1);
+        imagettftext($img, 32, 0, $x2, $y2, $white, $font, $txt2);
+                        $finalname = time().$name;
+                        $templatedonelink = "memes/$finalname.jpg";                       
+                        imagejpeg($img, $templatedonelink, 100);
+                        imagedestroy($img);
+        $upload=new Meme;
+        $upload->user_id=Auth::user()->id;
+        $upload->meme=$templatedonelink;
+        $upload->save();
+//        $keywords=$request->except('meme');
+//        foreach ($keywords as $value){
+//            $keyword=new Keyword;
+//            $keyword->keyword=$value;
+//            $keyword->meme_id=$upload->id;
+//            $keyword->save();
+//        }
+        return redirect()->route('meme.index'); 
+       
+       //return view('create');  
     }
 
     /**

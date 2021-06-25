@@ -16,17 +16,20 @@
                         echo '</p>';                        
                         findtemplate($id);
                         ?>
-                     <form action="/meme/create" method="post">
+                     <form action='{{ route('meme.create') }}' method="POST" >
+                           @csrf
+                           <label for="imgn"> image name </label>
+                           <input type="text" name="imgname" id="imgn" placeholder="your text">
                            <label for="text1"> First text </label>
-                           <input type="text" name="subject" id="text1" value="your text">
+                           <input type="text" name="textinput1" id="text1" placeholder="your text">
                            <label for="text2"> Second text </label>
-                           <input type="text" name="subject" id="text2" value="your text">
-                           <input type="file" value="<?php echo postresult($id,"first text","second text","location1","location2")?>">
-                           <input type="submit" name="my_form_submit_button" 
-                                  value="add you text"/>
+                           <input type="text" name="textinput2" id="text2" placeholder="your text">
+                           <input type="hidden" name="img" id="imgid" value="<?= $id ?>">
+                           <input type="submit" name="my_form_submit_button" >
 
                        </form>
-                       <?php    
+                       
+                           <?php    
                         
                         echo '<p>';
                         postresult($id,"first text","second text","location1","location2");
