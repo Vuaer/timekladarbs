@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Laravel\Socialite\Facades\Socialite;
-use Auth;
 use App\Models\User;
+use Auth;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
+use Laravel\Socialite\Facades\Socialite;
+
 
 
 class OAuthController extends Controller
@@ -29,7 +31,7 @@ class OAuthController extends Controller
     
     public function handleFacebookCallback()
     {
-        $user=Socialite::driver('facebook')->user();
+        $user=Socialite::driver('facebook')->stateless()->user();
         $this->createUser($user);
         return redirect()->route('meme.index');
     }
