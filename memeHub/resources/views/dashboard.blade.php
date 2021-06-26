@@ -41,7 +41,10 @@
                         <div class='col-md-8'>
                         @foreach($memes as $meme)                            
                             <div class='card m-3 border border-primary'>
-                                <div class="row justify-content-center mt-2"><p class="lead">{{$meme->title}}</p></div>
+                                <div class="row justify-content-center mt-2 ">
+                                    <p class="lead">{{$meme->title}}</p>
+                                </div>
+                                <div class="row justify-content-end mr-3">User:{{$meme->user->name}}</div>
                                 <a href="/meme/{{$meme->id}}" target="_blank">
                                 <img src='{{ asset($meme->meme)}}' class="card-img-top" alt='something'>
                                 <div class='row align-items-center'>
