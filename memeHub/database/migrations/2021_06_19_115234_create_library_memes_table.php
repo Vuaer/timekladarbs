@@ -16,7 +16,7 @@ class CreateLibraryMemesTable extends Migration
         Schema::create('library_memes', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->foreignId('meme_id')->constrained('memes');
+            $table->foreignId('meme_id')->constrained('memes')->onDelete('cascade');
             $table->foreignId('library_id')->constrained('libraries');
         });
     }

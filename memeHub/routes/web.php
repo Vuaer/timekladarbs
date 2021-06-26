@@ -42,7 +42,9 @@ Route::get('/profile',[ProfileController::class,'index']);
 Route::get('/findUser/{id}',[ProfileController::class,'findUser']);
 Route::post('/changerole/{id}',[ProfileController::class,'changeRole']);
 
+Route::resource('library',LibraryController::class);
 Route::get('/profile/library',[LibraryController::class,'index']);
+Route::delete('/profile/library/{id}',[LibraryController::class,'destroy']);
 Route::get('/create',[CreateController::class,'index']);
 Route::get('/profile/upload',[UploadController::class,'index']);
 Route::get('/create/{id}',[CreateController::class,'create']);
