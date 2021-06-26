@@ -75,7 +75,7 @@ class MemeController extends Controller
         $upload->meme='memes/'.$new_name;
         $upload->title=$request->title;
         $upload->save();
-        $keywords=$request->except('meme');
+        $keywords=$request->except(['meme','title']);
         foreach ($keywords as $value){
             $keyword=new Keyword;
             $keyword->keyword=$value;
@@ -226,5 +226,10 @@ class MemeController extends Controller
         $title= substr($meme->meme, 6);
         $file= public_path()."/memes/".$title;
         return \Illuminate\Support\Facades\Response::download($file,$title);
+    }
+    
+    public function user()
+    {
+        
     }
 }
