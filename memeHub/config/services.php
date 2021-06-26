@@ -37,7 +37,7 @@ return [
     'facebook' => [
         'client_id' => env('FACEBOOK_CLIENT_ID'),
         'client_secret' => env('FACEBOOK_CLIENT_SECRET'),
-        'redirect' => 'https://memehub.com/login/facebook/callback',
+        'redirect' => 'http://localhost/timekladarbs/memeHub/public/login/facebook/callback',
         ]
 
 ];
