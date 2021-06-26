@@ -15,6 +15,7 @@
                                 <div class='col-4'>
                                      <div class="row">
                                      @if(Auth::check())
+                                   
                                      @if($isliked)
                                      <button class="btn disabled" onclick="a({{$meme->id}}, true)" id="btn-like_{{$meme->id}}"><i class="fa fa-thumbs-up"></i></button>
                                      @else
@@ -34,6 +35,15 @@
                                          <div class="col-2" id="likes_{{$meme->id}}">{{$meme->likes}}</div>
                                          <div class="col-2" id="dislikes_{{$meme->id}}"> {{$meme->dislikes}}</div> 
                                      </div>
+                                     <div class="row">
+                                        <form method="POST" action="{{ action([App\Http\Controllers\LibraryController::class, 'store']) }}">
+                                            @csrf
+                                            <input type="hidden" name="meme_id" value="{{ $meme->id }}">
+                                            <input type="submit" class="btn btn-secondary" value="Save meme to library">
+                                        </form>
+                                     </div>
+                                        
+                                     
                                  </div>
                             </div>
                         @if(Auth::check())
@@ -51,8 +61,6 @@
                             <h5>Add comment:</h5>
                             <form method="POST" action="{{ action([App\Http\Controllers\CommentController::class, 'store']) }}">
                                 @csrf
-                                @if (count($errors) > 0)
-                                @endif
                                 <div class="form-group">
                                     <input type="hidden" name="meme_id" value="{{ $meme->id }}">
                                     <input type="text" class="form-control @error('comment_text') is-invalid @enderror" name="comment_text" id="comment_text">

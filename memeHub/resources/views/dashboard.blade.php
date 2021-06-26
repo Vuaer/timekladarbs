@@ -52,6 +52,15 @@
                                             <h6 class="btn btn-warning">Add comment</h6>
                                     </div>
                                     </a>
+                                    @if(Auth::check() and Auth::user()->id != $meme->user_id)
+                                    <div class="row">
+                                        <form method="POST" action="{{ action([App\Http\Controllers\LibraryController::class, 'store']) }}">
+                                            @csrf
+                                            <input type="hidden" name="meme_id" value="{{ $meme->id }}">
+                                            <input type="submit" class="btn btn-secondary" value="Save meme to library">
+                                        </form>
+                                     </div>
+                                    @endif
                                     <div class='col-4'>
                                         <div class="row">
                                         @if(Auth::check())

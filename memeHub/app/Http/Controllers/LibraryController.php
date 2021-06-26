@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 use App\Models\Meme;
+use App\Models\Library_meme;
+use App\Models\Library;
 use Illuminate\Http\Request;
-use auth;
+use Auth;
 
 class LibraryController extends Controller
 {
@@ -17,7 +19,8 @@ class LibraryController extends Controller
     }
     public function index()
     {
-        $memes=Meme::orderBy('id','DESC')->get();
+        $Library = Library::where('user_id',Auth::user()->id)->first();
+        $memes = Library_meme::where('library_id',$Library->id)->get(); 
         return view('library', compact('memes'));
 
     }
@@ -29,7 +32,7 @@ class LibraryController extends Controller
      */
     public function create()
     {
-        //
+
     }
 
     /**
@@ -40,7 +43,13 @@ class LibraryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $meme = new Library_meme;
+        $meme->meme_id = $request->meme_id;
+        $library = Library::where('user_id',Auth::user()->id)->first();
+        $meme->library_id = $library->id;
+        $meme->save();
+
+        return redirect('dashboard');
     }
 
     /**
@@ -52,7 +61,7 @@ class LibraryController extends Controller
     public function showmymemes()
     {
         $memes=Meme::orderBy('id','DESC')->get();
-        return view('library', compact('memes'));
+        return view('mymemes', compact('memes'));
     }
 
     /**
@@ -86,6 +95,8 @@ class LibraryController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $meme = Library_meme::findOrFail($id);
+        $meme->delete();
+        return redirect('library');
     }
 }
