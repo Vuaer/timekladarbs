@@ -65,6 +65,7 @@ class CreateController extends Controller
                         imagedestroy($img);
         $upload=new Meme;
         $upload->user_id=Auth::user()->id;
+        $upload->title=$name;
         $upload->meme=$templatedonelink;
         $upload->save();
 //        $keywords=$request->except('meme');
