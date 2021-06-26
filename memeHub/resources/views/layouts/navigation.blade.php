@@ -24,8 +24,8 @@
                     <x-nav-link href="/create" :active="request()->routeIs('CreateController.index')">
                         {{ __('navigation.Create') }}
                     </x-nav-link>
-                    <a href="{{route('locale','lv')}}">{{ __('Change language to lv') }} </a> 
-                    <a href="{{route('locale','en')}}">{{ __('Change language to en') }} </a> 
+                    <a href="{{route('locale','lv')}}">{{ __('lv') }} </a> 
+                    <a href="{{route('locale','en')}}">{{ __('en') }} </a> 
                   
                     
                 </div>
