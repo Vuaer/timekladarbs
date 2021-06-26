@@ -41,7 +41,7 @@ Route::get('/search',[MemeController::class,'search'])->name("meme.search");
 
 
 
-Route::get('/profile',[ProfileController::class,'index']);
+Route::get('/profile',[ProfileController::class,'index'])->name('profile.index');
 Route::get('/findUser/{id}',[ProfileController::class,'findUser']);
 Route::post('/changerole/{id}',[ProfileController::class,'changeRole']);
 
@@ -50,6 +50,7 @@ Route::get('/profile/library',[LibraryController::class,'index']);
 Route::delete('/profile/library/{id}',[LibraryController::class,'destroy']);
 Route::get('/create',[CreateController::class,'index']);
 Route::get('/profile/upload',[UploadController::class,'index']);
+Route::put('profile/update',[ProfileController::class,'update'])->name('profile.update');
 Route::get('/create/{id}',[CreateController::class,'create']);
 
 Route::post('/create/meme',[CreateController::class,'upload'])->name("meme.create");

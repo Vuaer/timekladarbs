@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use auth;
+//use auth;
+use Auth;
 use Illuminate\Support\Facades\Gate;
 use App\Models\User;
 use Illuminate\Support\Facades\App;
+
 
 class ProfileController extends Controller
 {
@@ -116,9 +118,13 @@ class ProfileController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        $user=User::find(Auth::user()->id);
+        $user->name=$request->name;
+        $user->email=$request->email;
+        $user->update();
+        return redirect()->route('profile.index');
     }
 
     /**

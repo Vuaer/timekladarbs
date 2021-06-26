@@ -58,6 +58,21 @@
     </div>
     @endisset
     @endcan
+    <div class="container">
+        <div class="row">
+            <div class="col-3">
+                <form method="POST" action="{{route('profile.update')}}">
+                    @csrf
+                    @method('PUT')
+                    <label for="name">Name:</label>
+                    <input type="text" name="name" id="name" value="{{Auth::user()->name}}">
+                    <label for="email">Email</label>
+                    <input type="email" name="email" id="name" value="{{Auth::user()->email}}">
+                    <input type="submit" value="Update" class="btn btn-primary mt-3"> 
+                </form>
+            </div>
+        </div>
+    </div>
 </div>
 
 <script>
