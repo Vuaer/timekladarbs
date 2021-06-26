@@ -24,5 +24,6 @@ class DatabaseSeeder extends Seeder
                    'email' => 'jack@memehub.test', 
                    'password' => bcrypt('jack@memehub.test')
         ));
+
     }
 }
