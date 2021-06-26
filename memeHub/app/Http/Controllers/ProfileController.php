@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use auth;
 use Illuminate\Support\Facades\Gate;
 use App\Models\User;
+use Illuminate\Support\Facades\App;
 
 class ProfileController extends Controller
 {
@@ -64,6 +65,12 @@ class ProfileController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+     public function changeLocale($locale)
+    {
+       session(['locale'=>$locale]);
+       App::setLocale($locale);
+       return redirect()->back();
+    }
     public function create()
     {
         //
@@ -124,4 +131,6 @@ class ProfileController extends Controller
     {
         //
     }
+    
+
 }

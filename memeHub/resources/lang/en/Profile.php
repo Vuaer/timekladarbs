@@ -6,12 +6,10 @@
  * and open the template in the editor.
  */
 return [
-    'Dashboard'=>'Dashboard',
-    'Profile'=>'Profile',
+    'Upload your meme'=>'Upload your meme',
     'Library'=>'Library',
-    'Create'=>'Create',
-    'Log Out'=>'Log Out',
-    'Log in'=>'Log in'
+    'My memes'=>'My memes',
+    'Profile'=>'Profile'
     
     
 ];
