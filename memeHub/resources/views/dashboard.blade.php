@@ -2,7 +2,7 @@
 <x-app-layout>
 <x-slot name="header">
     <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-        {{ __('Dashboard') }}
+        {{ __('dashboard.Dashboard') }}
     </h2>
 </x-slot>
 <div class='container'>
@@ -10,7 +10,7 @@
         <div class='col-md-10'>
             <div class="card">
                 <div class="card-header">
-                    <h4>Upload meme</h4>
+                    <h4>{{ __('dashboard.Upload meme') }}</h4>
                     @if(Auth::check())
                     <form action='/meme' enctype="multipart/form-data" method="POST">
                         @csrf
@@ -18,17 +18,17 @@
                             <input type='file' name='meme' class="form-control-image mb-3">
                         </div>
                         <div class="form-group col-4">
-                            <label for="title">Meme title:</label>
+                            <label for="title">{{ __('dashboard.Meme title') }}:</label>
                             <input type="text" id="title" name="title" class="form-control input-sm" placeholder="Enter title">
                         </div>
                         <div class='form-group col-4'>
                             <div id="toAppend">
-                                <label for="keyword">Meme keywords:</label>
+                                <label for="keyword">{{ __('dashboard.Meme keywords') }}:</label>
                                 <input type='text' id="keyword" name='keyword' placeholder="Enter keyword" class="form-control input-sm mb-3 mr-2">
                             </div>
                             <button type="button" class="btn btn-light" id="btn-add" onclick="newform()"><i class="fa fa-plus"></i></button>
                         </div>
-                        <input type='submit' value="Upload" class="btn btn-primary">
+                        <input type='submit' value="{{ __('dashboard.Upload') }}" class="btn btn-primary">
                     </form>
                     @endif
                     @if(Auth::guest())
@@ -44,12 +44,12 @@
                                 <div class="row justify-content-center mt-2 ">
                                     <p class="lead">{{$meme->title}}</p>
                                 </div>
-                                <div class="row justify-content-end mr-3">User:{{$meme->user->name}}</div>
+                                <div class="row justify-content-end mr-3">{{ __('dashboard.User') }}:{{$meme->user->name}}</div>
                                 <a href="/meme/{{$meme->id}}" target="_blank">
                                 <img src='{{ asset($meme->meme)}}' class="card-img-top" alt='something'>
                                 <div class='row align-items-center'>
                                     <div class='col-8'>
-                                            <h6 class="btn btn-warning">Add comment</h6>
+                                            <h6 class="btn btn-warning">{{ __('dashboard.Add comment') }}</h6>
                                     </div>
                                     </a>
                                     <div class='col-4'>
@@ -87,7 +87,7 @@
                             <form action='/meme/{{$meme->id}}' method="POST">
                                 @method('DELETE')
                                 @csrf
-                                <input type="submit" value="Delete" class="btn btn-danger">
+                                <input type="submit" value="{{ __('dashboard.Delete') }}" class="btn btn-danger">
                             </form>
                         </div>
                         @endif

@@ -42,13 +42,13 @@
                             <form action='/meme/{{$meme->id}}' method="POST">
                                 @method('DELETE')
                                 @csrf
-                                <input type="submit" value="Delete" class="btn btn-danger">
-                            </form>       
+                                <input type="submit" value="{{ __('showmeme.Delete') }}" class="btn btn-danger">
+                            </form>      
                         </div>
                         @endif
                         @endif 
                         <div >
-                            <h5>Add comment:</h5>
+                            <h5>{{ __('showmeme.Add comment') }}:</h5>
                             <form method="POST" action="{{ action([App\Http\Controllers\CommentController::class, 'store']) }}">
                                 @csrf
                                 @if (count($errors) > 0)
@@ -63,7 +63,7 @@
                                     @enderror
                                 </div>
                                 <div class="form-group">
-                                    <input type="submit" class="btn btn-warning" value="Add Comment">
+                                    <input type="submit" class="btn btn-warning" value="{{ __('showmeme.Add comment') }}">
                                 </div>
 
                             </form>
