@@ -7,9 +7,11 @@
  */
 return [
     'Dashboard'=>'Informācijas panelis',
-    
-    
-    
+    'Profile'=>'Profils',
+    'Library'=>'Bibliotēka',
+    'Create'=>'Izveidojiet mēmu',
+    'Log Out'=>'Iziet',
+    'Log in'=>'Pieslēgties'
     
 ];
 
