@@ -73,6 +73,7 @@ class MemeController extends Controller
         $upload=new Meme;
         $upload->user_id=Auth::user()->id;
         $upload->meme='memes/'.$new_name;
+        $upload->title=$request->title;
         $upload->save();
         $keywords=$request->except('meme');
         foreach ($keywords as $value){

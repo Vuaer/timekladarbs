@@ -12,13 +12,18 @@
                 <div class="card-header">
                     <h4>Upload meme</h4>
                     @if(Auth::check())
-                    <form action='/meme' enctype="multipart/form-data" method="POST" class='form-inline'>
+                    <form action='/meme' enctype="multipart/form-data" method="POST">
                         @csrf
                         <div class='form-group'>
                             <input type='file' name='meme' class="form-control-image mb-3">
                         </div>
-                        <div class='form-group col'>
+                        <div class="form-group col-4">
+                            <label for="title">Meme title:</label>
+                            <input type="text" id="title" name="title" class="form-control input-sm" placeholder="Enter title">
+                        </div>
+                        <div class='form-group col-4'>
                             <div id="toAppend">
+                                <label for="keyword">Meme keywords:</label>
                                 <input type='text' id="keyword" name='keyword' placeholder="Enter keyword" class="form-control input-sm mb-3 mr-2">
                             </div>
                             <button type="button" class="btn btn-light" id="btn-add" onclick="newform()"><i class="fa fa-plus"></i></button>
@@ -34,9 +39,9 @@
                     <div class='container mt-2'>
                         <div class='row justify-content-center'>
                         <div class='col-md-8'>
-                        @foreach($memes as $meme)
-                            
+                        @foreach($memes as $meme)                            
                             <div class='card m-3 border border-primary'>
+                                <div class="row justify-content-center mt-2"><p class="lead">{{$meme->title}}</p></div>
                                 <a href="/meme/{{$meme->id}}" target="_blank">
                                 <img src='{{ asset($meme->meme)}}' class="card-img-top" alt='something'>
                                 <div class='row align-items-center'>

@@ -18,6 +18,7 @@ class CreateMemeTable extends Migration
             $table->timestamps();
             $table->string('meme');
             $table->foreignId('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->string('title');
             $table->integer('likes')->nullable();
             $table->integer('dislikes')->nullable();
         });
