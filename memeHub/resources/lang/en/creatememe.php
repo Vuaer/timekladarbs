@@ -5,10 +5,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 return [
-    'Delete'=>'Dzēst',
-    'Add comment'=>'Pievienot komentāru',
-    'Delete from library'=>'Dzēst no bibliotēkas'
-    
+    'Image title'=>'Image title',
+    'First text'=>'First text',
+    'Second text'=>'Second text',
+    'Upload'=>'Upload',
+    'Your text'=>'Your text',
+    'Your title'=>'Your title'
 ];

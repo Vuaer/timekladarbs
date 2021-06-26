@@ -9,23 +9,22 @@
         <div class='col-md-10'>
             <div class="card">
                    
-                      <?php    
-                        
-                        echo '<p>';
-                        echo ''. $id .'';
-                        echo '</p>';                        
+                      <?php                        
                         findtemplate($id);
                         ?>
                      <form action='{{ route('meme.create') }}' method="POST" >
                            @csrf
-                           <label for="imgn"> image name </label>
-                           <input type="text" name="imgname" id="imgn" placeholder="your text">
-                           <label for="text1"> First text </label>
-                           <input type="text" name="textinput1" id="text1" placeholder="your text">
-                           <label for="text2"> Second text </label>
-                           <input type="text" name="textinput2" id="text2" placeholder="your text">
+                           <label for="imgn"> {{ __('creatememe.Image title') }} </label>
+                           <input type="text" name="imgname" id="imgn" placeholder="{{ __('creatememe.Your title') }}">
+                           <br>
+                           <label for="text1"> {{ __('creatememe.First text') }} </label>
+                           <input type="text" name="textinput1" id="text1" placeholder="{{ __('creatememe.Your text') }}">
+                           <br>
+                           <label for="text2"> {{ __('creatememe.Second text') }} </label>
+                           <input type="text" name="textinput2" id="text2" placeholder="{{ __('creatememe.Your text') }}">
                            <input type="hidden" name="img" id="imgid" value="<?= $id ?>">
-                           <input type="submit" name="my_form_submit_button" >
+                           <br>
+                           <input type="submit" name="my_form_submit_button" value="{{ __('creatememe.Upload') }}" >
 
                        </form>
                        

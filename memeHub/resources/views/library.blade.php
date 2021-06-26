@@ -22,13 +22,13 @@
                                     <img src='{{ asset($lib_meme->meme->meme)}}' class="card-img-top pb-5 " alt='something' >
                                 </div>
                             <div class="row justify-content-begin form-group">
-                                <h6 class="btn btn-warning">Add comment</h6>
+                                <h6 class="btn btn-warning">{{ __('showmeme.Add comment') }}</h6>
                             </div>
                             <div class="row justify-content-end">
                                 <form action='/profile/library/{{$lib_meme->id}}' method="POST">
                                     @method('DELETE')
                                     @csrf
-                                    <input type="submit" value="Delete from library" class="btn btn-danger">
+                                    <input type="submit" value="{{ __('showmeme.Delete from library') }}" class="btn btn-danger">
                                 </form>
 
                             </div>

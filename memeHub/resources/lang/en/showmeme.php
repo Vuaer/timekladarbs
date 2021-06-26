@@ -8,6 +8,6 @@
 
 return [
     'Delete'=>'Delete',
-    'Add comment'=>'Add comment'
-    
+    'Add comment'=>'Add comment',
+    'Delete from library'=>'Delete from library'
 ];
