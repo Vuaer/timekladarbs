@@ -20,6 +20,9 @@ use App\Http\Controllers\OAuthController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::middleware(['set_locale'])->group(function() 
+{
+    
 
 Route::resource('meme', MemeController::class);
 Route::get('/',[MemeController::class,'index']);
@@ -58,3 +61,6 @@ Route::post('meme/like',[MemeController::class,'like'])->name("meme.like");
 Route::post('meme/dislike',[MemeController::class,'dislike'])->name("meme.dislike");
 Route::get('meme/download/{id}',[MemeController::class,'download'])->name("meme.download");
 
+Route::get('locale/{locale}',[ProfileController::class,'changeLocale'])->name('locale');
+
+});

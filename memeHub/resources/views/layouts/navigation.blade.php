@@ -13,18 +13,20 @@
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:mt-10 sm:flex">
                     <x-nav-link :href="route('meme.index')" :active="request()->routeIs('meme.index') ">
-                        {{ __('Dashboard') }}
+                        {{ __('navigation.Dashboard') }}
                     </x-nav-link>
                     <x-nav-link href="/profile" :active="request()->routeIs('ProfileController.index')"> 
-                        {{ __('Profile') }}
+                        {{ __('navigation.Profile') }}
                     </x-nav-link>
                     <x-nav-link href="/profile/library" :active="request()->routeIs('LibraryController.index')">
-                        {{ __('Library') }}
+                        {{ __('navigation.Library') }}
                     </x-nav-link>
                     <x-nav-link href="/create" :active="request()->routeIs('CreateController.index')">
-                        {{ __('Create') }}
+                        {{ __('navigation.Create') }}
                     </x-nav-link>
-                    
+                    <a href="{{route('locale','lv')}}">{{ __('lv') }} </a> 
+                    <a href="{{route('locale','en')}}">{{ __('en') }} </a> 
+                  
                     
                 </div>
             </div>
@@ -60,7 +62,7 @@
                             <x-dropdown-link :href="route('logout') "
                                     onclick="event.preventDefault();
                                                 this.closest('form').submit();">
-                                {{ __('Log Out') }}
+                                {{ __('navigation.Log Out') }}
                             </x-dropdown-link>
                         </form>
                     </x-slot>
@@ -69,7 +71,7 @@
             @endif
             @if(Auth::guest())
             <div class="flex mt-8 bg-gray-800 border border-transparent rounded-md font-semibold inline-flex items-center px-4 py-2">            
-                <x-nav-link :href="route('login')" :active="request()->routeIs('Login')" class="text-white">{{__('Log in')}}</x-nav-link>         
+                <x-nav-link :href="route('login')" :active="request()->routeIs('Login')" class="text-white">{{__('navigation.Log in')}}</x-nav-link>         
             </div>
             @endif
 
@@ -88,7 +90,7 @@
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden flex">
         <div class="pt-2 pb-3 space-y-1">
             <x-responsive-nav-link :href="route('meme.index')" :active="request()->routeIs('meme.index')">
-                {{ __('Dashboard') }}
+                {{ __('navigation.Dashboard') }}
             </x-responsive-nav-link>
         </div>
 
@@ -108,7 +110,7 @@
                     <x-responsive-nav-link :href="route('logout')"
                             onclick="event.preventDefault();
                                         this.closest('form').submit();">
-                        {{ __('Log Out') }}
+                        {{ __('navigation.Log Out') }}
                     </x-responsive-nav-link>
                 </form>
             </div>
