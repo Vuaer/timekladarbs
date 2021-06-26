@@ -64,8 +64,11 @@
                                         </div>
                                         <div class="row">
                                             <div class="col-2" id="likes_{{$meme->id}}">{{$meme->likes}}</div>
-                                            <div class="col-2" id="dislikes_{{$meme->id}}"> {{$meme->dislikes}}</div> 
+                                            <div class="col-2" id="dislikes_{{$meme->id}}"> {{$meme->dislikes}}</div>
                                         </div>
+                                    </div>
+                                    <div class ="col-1">
+                                        <a href="/meme/download/{{$meme->id}}"><i class="fa fa-download"></i></a>
                                     </div>
                                 </div>
                             </div>
@@ -78,9 +81,7 @@
                                 @csrf
                                 <input type="submit" value="Delete" class="btn btn-danger">
                             </form>
-                            
                         </div>
-                        
                         @endif
                         @endif
                         @endforeach

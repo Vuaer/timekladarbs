@@ -218,4 +218,12 @@ class MemeController extends Controller
            return view('dashboard', compact('memes','liked_memes_ids','disliked_memes_ids')); 
         }
     }
+    
+    public function download($id)
+    {
+        $meme=Meme::find($id);
+        $title= substr($meme->meme, 6);
+        $file= public_path()."/memes/".$title;
+        return \Illuminate\Support\Facades\Response::download($file,$title);
+    }
 }
