@@ -67,10 +67,9 @@ class ProfileController extends Controller
      */
      public function changeLocale($locale)
     {
+       session(['locale'=>$locale]);
        App::setLocale($locale);
-//       $currentLocale = App::currentLocale();
-//       dd($currentLocale);
-      return redirect()->back();
+       return redirect()->back();
     }
     public function create()
     {

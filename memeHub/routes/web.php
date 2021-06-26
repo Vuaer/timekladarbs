@@ -20,6 +20,9 @@ use App\Http\Controllers\OAuthController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::middleware(['set_locale'])->group(function() 
+{
+    
 
 Route::resource('meme', MemeController::class);
 Route::get('/',[MemeController::class,'index']);
@@ -59,3 +62,4 @@ Route::post('meme/dislike',[MemeController::class,'dislike'])->name("meme.dislik
 
 Route::get('locale/{locale}',[ProfileController::class,'changeLocale'])->name('locale');
 
+});
