@@ -19,12 +19,12 @@
                         </div>
                         <div class="form-group col-4">
                             <label for="title">{{ __('dashboard.Meme title') }}:</label>
-                            <input type="text" id="title" name="title" class="form-control input-sm" placeholder="Enter title">
+                            <input type="text" id="title" name="title" class="form-control input-sm" placeholder="{{ __('dashboard.Enter title') }}">
                         </div>
                         <div class='form-group col-4'>
                             <div id="toAppend">
                                 <label for="keyword">{{ __('dashboard.Meme keywords') }}:</label>
-                                <input type='text' id="keyword" name='keyword' placeholder="Enter keyword" class="form-control input-sm mb-3 mr-2">
+                                <input type='text' id="keyword" name='keyword' placeholder="{{ __('dashboard.Enter keyword') }}" class="form-control input-sm mb-3 mr-2">
                             </div>
                             <button type="button" class="btn btn-light" id="btn-add" onclick="newform()"><i class="fa fa-plus"></i></button>
                         </div>
