@@ -5,11 +5,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 return [
-    'Delete'=>'Delete',
-    'Add comment'=>'Add comment',
-    'Delete from library'=>'Delete from library',
-    'No memes'=>'No memes',
-    'Library'=>'Library'
+    'Upload meme'=>'Augšupielādēt mēmu',
+    'Upload'=>'Augšupielādēt',
+    'Registration required'=>'Nepieciešama reģistrācija'
+
+    
+    
 ];

@@ -2,7 +2,7 @@
 <x-app-layout>
 <x-slot name="header">
     <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-        Library
+        {{ __('showmeme.Library') }}
     </h2>
 </x-slot>
 <div class='container'>
@@ -35,7 +35,7 @@
 
                             @endif
                             @empty
-                                <p>No memes!</p>
+                                <p>{{ __('showmeme.No memes') }}!</p>
                         @endforelse
                         
                         </div>

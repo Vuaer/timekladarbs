@@ -45,6 +45,8 @@ Route::get('/search',[MemeController::class,'search'])->name("meme.search");
 Route::get('/profile',[ProfileController::class,'index'])->name('profile.index');
 Route::get('/findUser/{id}',[ProfileController::class,'findUser']);
 Route::post('/changerole/{id}',[ProfileController::class,'changeRole']);
+Route::get('/showBanUser/{id}',[ProfileController::class,'showBanUser']);
+Route::post('/ban/{id}',[ProfileController::class,'ban']);
 
 Route::resource('library',LibraryController::class);
 Route::get('/profile/library',[LibraryController::class,'index']);

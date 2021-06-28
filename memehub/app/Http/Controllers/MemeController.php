@@ -28,6 +28,7 @@ class MemeController extends Controller
      */
     public function __construct(){
         $this->middleware('auth',['except'=>['index','show','search']]);
+
     }
     
     public function index($personalized=0,$content=NULL)
@@ -73,6 +74,7 @@ class MemeController extends Controller
      */
     public function upload(Request $request)
     {
+        
         $this->validate($request,[
             'meme'=>'required'
         ]);

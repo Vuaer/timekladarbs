@@ -9,6 +9,8 @@
 return [
     'Delete'=>'Dzēst',
     'Add comment'=>'Pievienot komentāru',
-    'Delete from library'=>'Dzēst no bibliotēkas'
+    'Delete from library'=>'Dzēst no bibliotēkas',
+    'No memes'=>'Nav memu',
+    'Library'=>'Bibliotēka'
     
 ];
