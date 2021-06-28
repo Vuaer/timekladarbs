@@ -67,6 +67,13 @@
                 </x-button>
             </div>
         </form>
+        <div class="card-body">
+
+        @if (session('message'))
+            <div class="alert alert-danger">{{ session('message') }}</div>
+        @endif
+
+    <form method="POST" action="{{ route('login') }}">
         <div class="row">
             <a href="{{route('login.google')}}" class="btn btn-block"><i class="fa fa-google"></i></a>
             <a href="{{route('login.facebook')}}" class="btn btn-block"><i class="fa fa-facebook"></i></a>

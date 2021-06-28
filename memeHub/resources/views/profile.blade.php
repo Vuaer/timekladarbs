@@ -36,13 +36,13 @@
     </div>
     @endcan
 
-    @can('is-admin')
-    <h3>{{ __('profile.Change user role') }}:</h3>
+    @can('is-moder')
+    <h3>Find user:</h3>
     <div class="flex mt-9">
         <form action='/profile' method="GET">
         @csrf
-            <input type="text" name="name" placeholder="{{ __('profile.Enter username') }}" class="form-control @error('name') is-invalid @enderror">
-            <x-button type="submit">{{ __('profile.Search') }}</x-button>
+            <input type="text" name="name" placeholder="Enter username" class="form-control @error('name') is-invalid @enderror">
+            <x-button type="submit">Search</x-button>
         </form>
     </div>
     @isset($users)
@@ -50,16 +50,23 @@
         @foreach($users as $user)
         <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
-                        <button>{{$user->name}}<p>{{$user->role}}</p></button>
+                        <button class="flex-item pl-6 width-30">{{$user->name}}<p>{{$user->role}}</p></button>
                     </x-slot>
                 <x-slot name="content" >
+                    @can('is-admin')
                     <form method="GET" action="{{ action([App\Http\Controllers\ProfileController::class, 'findUser'], $user->id) }}">
                     @csrf
                     <p>
                     <input type="submit" value="Change role">
                     </p>
                     </form>
-                    <p>Block</p>
+                    @endcan
+                   <form method="GET" action="{{ action([App\Http\Controllers\ProfileController::class, 'showBanUser'], $user->id) }}">
+                        @csrf
+                        <p>
+                        <input type="submit" value="Block">
+                        </p>
+                        </form>
                 </x-slot>
                 </x-dropdown>
         @endforeach
@@ -72,11 +79,11 @@
                 <form method="POST" action="{{route('profile.update')}}">
                     @csrf
                     @method('PUT')
-                    <label for="name">{{ __('profile.Name') }}:</label>
+                    <label for="name">Name:</label>
                     <input type="text" name="name" id="name" value="{{Auth::user()->name}}">
-                    <label for="email">{{ __('profile.Email') }}</label>
+                    <label for="email">Email</label>
                     <input type="email" name="email" id="name" value="{{Auth::user()->email}}">
-                    <input type="submit" value="{{ __('profile.Update') }}" class="btn btn-primary mt-3"> 
+                    <input type="submit" value="Update" class="btn btn-primary mt-3"> 
                 </form>
             </div>
         </div>

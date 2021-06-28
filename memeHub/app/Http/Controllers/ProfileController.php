@@ -3,11 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-//use auth;
 use Auth;
 use Illuminate\Support\Facades\Gate;
 use App\Models\User;
 use Illuminate\Support\Facades\App;
+use Illuminate\Validation\Rule;
+Use \Carbon\Carbon;
 
 
 class ProfileController extends Controller
@@ -60,6 +61,30 @@ class ProfileController extends Controller
             $user->role = $request->role;
             $user->save();
         }
+        return redirect('profile');
+    }
+    public function showBanUser($id)
+    {
+        if(Gate::allows('is-moder'))
+        {
+            $user = User::findOrFail($id);
+            return view('ban',compact('user'));
+        }
+    }
+
+    public function ban(Request $request,$id)
+    {
+        $rules = array
+                (
+                    'days' => 'required | integer | min:1 | max:50000',
+                );
+        $this->validate($request,$rules);
+
+        $user = $user = User::findOrFail($id);
+        $currentDate = Carbon::now();
+        $currentDate = $currentDate->addDays($request->days);
+        $user->banned_until = $currentDate;
+        $user->save();
         return redirect('profile');
     }
     /**
