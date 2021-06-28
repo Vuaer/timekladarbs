@@ -39,7 +39,7 @@
                     <div class='container mt-2'>
                         <div class='row justify-content-center'>
                         <div class='col-md-8'>
-                        @foreach($memes as $meme)                            
+                        @foreach($memes as $meme)
                             <div class='card m-3 border border-primary'>
                                 <div class="row justify-content-center mt-2 ">
                                     <p class="lead">{{$meme->title}}</p>
@@ -109,6 +109,11 @@
                         {{$memes->links("pagination::bootstrap-4")}}
                     </div> 
                 </div>
+            </div>
+        </div>
+        <div class="col-2">
+            <div class="row justify-content-center mt-5">
+                <a href="{{route('personalize')}}" class="text-success p-1">Memes for you</a>
             </div>
         </div>
     </div>

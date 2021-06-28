@@ -36,6 +36,7 @@ Route::get('/login/facebook/callback',[OAuthController::class,'handleFacebookCal
 
 
 Route::post('/meme',[MemeController::class,'upload']);
+Route::get('/personalize',[MemeController::class,'personalize'])->name('personalize');
 Route::delete('/meme/{id}',[MemeController::class,'destroy']);
 Route::get('/search',[MemeController::class,'search'])->name("meme.search");
 
@@ -65,5 +66,8 @@ Route::post('meme/dislike',[MemeController::class,'dislike'])->name("meme.dislik
 Route::get('meme/download/{id}',[MemeController::class,'download'])->name("meme.download");
 
 Route::get('locale/{locale}',[ProfileController::class,'changeLocale'])->name('locale');
+
+Route::get('/profile/delete/{keyword}',[ProfileController::class,'deleteKeyword']);
+
 
 });

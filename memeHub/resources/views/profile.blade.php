@@ -68,15 +68,34 @@
     @endcan
     <div class="container">
         <div class="row">
-            <div class="col-3">
+            <div class="col-8">
                 <form method="POST" action="{{route('profile.update')}}">
                     @csrf
                     @method('PUT')
+                    <div class='col-3'>
                     <label for="name">Name:</label>
-                    <input type="text" name="name" id="name" value="{{Auth::user()->name}}">
+                    <input type="text" name="name" id="name" value="{{Auth::user()->name}}" class="mb-1">
                     <label for="email">Email</label>
-                    <input type="email" name="email" id="name" value="{{Auth::user()->email}}">
-                    <input type="submit" value="Update" class="btn btn-primary mt-3"> 
+                    <input type="email" name="email" id="name" value="{{Auth::user()->email}}" class='mb-3'>
+                    <label for="keyword">Keywords:</label>
+                    @foreach($keywords as $keyword)
+                    <input type="text" id="keyword" value="{{$keyword}}" disabled class='mt-2'>
+                    <a href='{{url('profile/delete/'.$keyword)}}' class="btn"><i class='fa fa-trash'></i></a>
+                    @endforeach
+                    @empty($keywords)
+                    <p style="color:red">You haven't any keywords!</p>
+                    @endempty
+                    </div>
+                        <div class="mt-4" id="toAppend">
+                            <label for="keyword_new">Add:</label>
+                            <select id="keyword_new" name='keyword' class="mb-3 mr-2">
+                                @foreach($meme_keywords as $meme_keyword)
+                                <option value="{{$meme_keyword}}">{{$meme_keyword}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <button type="button" class="btn btn-light" id="btn-add" onclick="newform()"><i class="fa fa-plus"></i></button>
+                    <input type="submit" value="Update" class="btn btn-primary ml-2"> 
                 </form>
             </div>
         </div>
@@ -86,7 +105,13 @@
 <script>
 function changeRole(userId)
 {
-    window.location.href="/changerole/"+userId";
+    window.location.href="/changerole/"+userId;
+}
+
+var number=0;
+function newform(){
+    $("#keyword_new").clone().attr("name","keyword"+number).appendTo("#toAppend");
+    number++;
 }
 </script>
 </x-app-layout>

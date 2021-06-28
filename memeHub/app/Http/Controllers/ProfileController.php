@@ -8,6 +8,8 @@ use Auth;
 use Illuminate\Support\Facades\Gate;
 use App\Models\User;
 use Illuminate\Support\Facades\App;
+use App\Models\User_keyword;
+use App\Models\Keyword;
 
 
 class ProfileController extends Controller
@@ -22,6 +24,9 @@ class ProfileController extends Controller
     }
     public function index(Request $request)
     {
+        $keywords=User_keyword::where('user_id','=',Auth::user()->id)->pluck('keyword')->toArray();
+        $meme_keywords=Keyword::select('keyword')->distinct()->pluck('keyword')->sortBy('keyword');
+        $meme_keywords;
         if(Gate::allows('is-moder'))
         {
             if($request->has('name') & $request->name != NULL)
@@ -29,18 +34,18 @@ class ProfileController extends Controller
                 $users = User::Where('name','LIKE','%'.$request->name.'%')->orderBy("name","asc")->get();
                 $moderators = User::where('role','=','moderator')->get();
                 $administrators = User::where('role','=','administrator')->get();
-                return view('profile',compact('moderators','administrators','users'));
+                return view('profile',compact('moderators','administrators','users','keywords','meme_keywords'));
             }
             else
             {
                 $moderators = User::where('role','=','moderator')->get();
                 $administrators = User::where('role','=','administrator')->get();
-                return view('profile',compact('moderators','administrators'));
+                return view('profile',compact('moderators','administrators','keywords','meme_keywords'));
             }
         }
         else
         {
-        return view('profile');
+        return view('profile', compact('keywords','meme_keywords'));
         }
     }
 
@@ -124,6 +129,15 @@ class ProfileController extends Controller
         $user->name=$request->name;
         $user->email=$request->email;
         $user->update();
+        $keywords=$request->except(['name','email','_method','_token']);
+        foreach ($keywords as $keyword){
+            if(!User_keyword::where('user_id','=',Auth::user()->id)->where('keyword','=',$keyword)->exists()){
+                $user_keyword=new User_keyword;
+                $user_keyword->user_id=Auth::user()->id;
+                $user_keyword->keyword=$keyword;
+                $user_keyword->save();
+                }
+        }
         return redirect()->route('profile.index');
     }
 
@@ -136,6 +150,12 @@ class ProfileController extends Controller
     public function destroy($id)
     {
         //
+    }
+    
+    public function deleteKeyword($keyword)
+    {
+        User_keyword::where('keyword','=',$keyword)->where('user_id','=',Auth::user()->id)->delete();
+        return redirect()->route('profile.index');
     }
     
 

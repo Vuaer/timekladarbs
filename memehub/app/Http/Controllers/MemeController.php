@@ -17,6 +17,7 @@ use App\Models\Library_meme;
 use App\Models\Library;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\DB;
+use App\Models\User_keyword;
 
 class MemeController extends Controller
 {
@@ -29,17 +30,25 @@ class MemeController extends Controller
         $this->middleware('auth',['except'=>['index','show','search']]);
     }
     
-    public function index()
+    public function index($personalized=0,$content=NULL)
     {
-        $memes=Meme::orderBy('id','DESC')->paginate(5);
         if(Auth::check())
         {
             $liked_memes_ids=Like::where('user_id','=',Auth::user()->id)->pluck('meme_id')->toArray();
             $disliked_memes_ids=Dislike::where('user_id','=',Auth::user()->id)->pluck('meme_id')->toArray();
-            return view('dashboard',compact('memes','liked_memes_ids','disliked_memes_ids'));
+            if($personalized==0){
+                $memes=Meme::orderBy('id','DESC')->paginate(3);
+                return view('dashboard',compact('memes','liked_memes_ids','disliked_memes_ids'));
+                }
+            else{
+                //return $content;
+                $memes=$content;
+                return view('dashboard',compact('memes','liked_memes_ids','disliked_memes_ids'));
+                }
         }
         else
         {
+           $memes=Meme::orderBy('id','DESC')->paginate(3);
            $liked_memes_ids=array();
            $disliked_memes_ids=array();
            return view('dashboard', compact('memes','liked_memes_ids','disliked_memes_ids')); 
@@ -75,7 +84,7 @@ class MemeController extends Controller
         $upload->meme='memes/'.$new_name;
         $upload->title=$request->title;
         $upload->save();
-        $keywords=$request->except(['meme','title']);
+        $keywords=$request->except(['meme','title','_token']);
         foreach ($keywords as $value){
             $keyword=new Keyword;
             $keyword->keyword=$value;
@@ -228,8 +237,11 @@ class MemeController extends Controller
         return \Illuminate\Support\Facades\Response::download($file,$title);
     }
     
-    public function user()
+    public function personalize()
     {
-        
+        $user_keywords=User_keyword::where('user_id','=',Auth::user()->id)->pluck('keyword');
+        $memes_ids=Keyword::select('meme_id')->whereIn('keyword',$user_keywords)->pluck('meme_id');
+        $memes=Meme::whereIn('id',$memes_ids)->orderBy('id','DESC')->paginate(3);
+        return $this->index(1,$memes);
     }
 }

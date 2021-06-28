@@ -13,11 +13,11 @@ class CreateUserKeywordTable extends Migration
      */
     public function up()
     {
-        Schema::create('user_keyword', function (Blueprint $table) {
+        Schema::create('user_keywords', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->foreignId('keyword_id')->constrained();
-            $table->foreignId('user_id')->constrained();
+            $table->string('keyword');
+            $table->foreignId('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 
@@ -28,6 +28,6 @@ class CreateUserKeywordTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('user_keyword');
+        Schema::dropIfExists('user_keywords');
     }
 }
