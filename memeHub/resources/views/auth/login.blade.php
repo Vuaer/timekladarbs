@@ -9,7 +9,7 @@
 
                 <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block">
                         @if (Route::has('register'))
-                            <a href="{{ route('register') }}" class="ml-4 text-sm text-gray-700 underline">Register</a>
+                            <a href="{{ route('register') }}" class="ml-4 text-sm text-gray-700 underline">{{ __('auth.Register') }}</a>
                         @endif
                 </div>
         
@@ -24,14 +24,14 @@
 
             <!-- Email Address -->
             <div>
-                <x-label for="email" :value="__('Email')" />
+                <x-label for="email" :value=" __('auth.Email')" />
 
                 <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus />
             </div>
 
             <!-- Password -->
             <div class="mt-4">
-                <x-label for="password" :value="__('Password')" />
+                <x-label for="password" :value="__('auth.Password')" />
 
                 <x-input id="password" class="block mt-1 w-full"
                                 type="password"
@@ -43,7 +43,7 @@
             <div class="block mt-4">
                 <label for="remember_me" class="inline-flex items-center">
                     <input id="remember_me" type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" name="remember">
-                    <span class="ml-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
+                    <span class="ml-2 text-sm text-gray-600">{{ __('auth.Remember me') }}</span>
                 </label>
             </div>
 <!--            <div class="flex items-center justify-end mt-4"> 
@@ -58,18 +58,21 @@
                 
                 @if (Route::has('password.request'))
                     <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('password.request') }}">
-                        {{ __('Forgot your password?') }}
+                        {{ __('auth.Forgot your password?') }}
                     </a>
                 @endif
 
                 <x-button class="ml-3">
-                    {{ __('Log in') }}
+                    {{ __('auth.Log in') }}
                 </x-button>
             </div>
         </form>
         <div class="row">
             <a href="{{route('login.google')}}" class="btn btn-block"><i class="fa fa-google"></i></a>
             <a href="{{route('login.facebook')}}" class="btn btn-block"><i class="fa fa-facebook"></i></a>
+            <br>
+            <a href="{{route('locale','lv')}}">{{ __('lv') }} </a> 
+            <a href="{{route('locale','en')}}">{{ __('en') }} </a> 
         </div>
     </x-auth-card>
 </x-guest-layout>
