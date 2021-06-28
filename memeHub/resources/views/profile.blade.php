@@ -46,14 +46,22 @@
         </form>
     </div>
     @isset($users)
-    <div>
+   <div class="hidden sm:flex sm:items-center sm:ml-6">
         @foreach($users as $user)
-        <form method="GET" action="{{ action([App\Http\Controllers\ProfileController::class, 'findUser'], $user->id) }}">
-        @csrf
-        <p>
-        <input type="submit" value="{{$user->name}}">
-        </p>
-        </form>
+        <x-dropdown align="right" width="48">
+                    <x-slot name="trigger">
+                        <button>{{$user->name}}<p>{{$user->role}}</p></button>
+                    </x-slot>
+                <x-slot name="content" >
+                    <form method="GET" action="{{ action([App\Http\Controllers\ProfileController::class, 'findUser'], $user->id) }}">
+                    @csrf
+                    <p>
+                    <input type="submit" value="Change role">
+                    </p>
+                    </form>
+                    <p>Block</p>
+                </x-slot>
+                </x-dropdown>
         @endforeach
     </div>
     @endisset
