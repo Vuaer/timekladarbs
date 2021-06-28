@@ -9,6 +9,13 @@ return [
     'Upload your meme'=>'Augšupielādējiet savu mēmu',
     'Library'=>'Bibliotēka',
     'My memes'=>'Mani memi',
-    'Profile'=>'Profils'
+    'Profile'=>'Profils',
+    'Enter username'=>'Ievadiet lietotājvārdu',
+    'Search'=>'Meklēt',
+    'Change user role'=>'Mainīt lietotāja lomu',
+    'Name'=>'Lietotāja vārds',
+    'Email'=>'E-pasts',
+    'Update'=>'Atjaunināt',
+    'Search'=>'Meklēt'
 ];
 

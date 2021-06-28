@@ -14,6 +14,9 @@ return [
     'User'=>'User',
     'Meme title'=>'Meme title',
     'Upload'=>'Upload',
-    'Delete'=>'Delete'
+    'Delete'=>'Delete',
+    'Enter title'=>'Enter title',
+    'Enter keyword'=>'Enter keyword'
+
     
 ];

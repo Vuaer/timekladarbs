@@ -9,7 +9,13 @@ return [
     'Upload your meme'=>'Upload your meme',
     'Library'=>'Library',
     'My memes'=>'My memes',
-    'Profile'=>'Profile'
+    'Enter username'=>'Enter username',
+    'Search'=>'Search',
+    'Change user role'=>'Change user role',
+    'Name'=>'Name',
+    'Email'=>'Email',
+    'Update'=>'Update',
+    'Search'=>'Search'
     
     
 ];

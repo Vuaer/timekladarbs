@@ -37,12 +37,12 @@
     @endcan
 
     @can('is-admin')
-    <h3>Change user role:</h3>
+    <h3>{{ __('profile.Change user role') }}:</h3>
     <div class="flex mt-9">
         <form action='/profile' method="GET">
         @csrf
-            <input type="text" name="name" placeholder="Enter username" class="form-control @error('name') is-invalid @enderror">
-            <x-button type="submit">Search</x-button>
+            <input type="text" name="name" placeholder="{{ __('profile.Enter username') }}" class="form-control @error('name') is-invalid @enderror">
+            <x-button type="submit">{{ __('profile.Search') }}</x-button>
         </form>
     </div>
     @isset($users)
@@ -64,11 +64,11 @@
                 <form method="POST" action="{{route('profile.update')}}">
                     @csrf
                     @method('PUT')
-                    <label for="name">Name:</label>
+                    <label for="name">{{ __('profile.Name') }}:</label>
                     <input type="text" name="name" id="name" value="{{Auth::user()->name}}">
-                    <label for="email">Email</label>
+                    <label for="email">{{ __('profile.Email') }}</label>
                     <input type="email" name="email" id="name" value="{{Auth::user()->email}}">
-                    <input type="submit" value="Update" class="btn btn-primary mt-3"> 
+                    <input type="submit" value="{{ __('profile.Update') }}" class="btn btn-primary mt-3"> 
                 </form>
             </div>
         </div>

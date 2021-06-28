@@ -14,6 +14,7 @@ return [
     'User'=>'Lietotājs',
     'Meme title'=>'Meme nosaukums',
     'Upload'=>'Augšupielādēt',
-    'Delete'=>'Dzēst'
-    
+    'Delete'=>'Dzēst',
+    'Enter title'=>'Ievadiet nosaukumu',
+    'Enter keyword'=>'Ievadiet atslēgvārdu'
 ];
