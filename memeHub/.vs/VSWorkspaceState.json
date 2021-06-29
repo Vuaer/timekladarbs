@@ -3,15 +3,14 @@
     "",
     "\\app",
     "\\app\\Http",
-    "\\app\\Http\\Controllers",
-    "\\database",
-    "\\database\\migrations",
+    "\\app\\Http\\Requests\\Auth",
+    "\\app\\Models",
     "\\resources",
     "\\resources\\views",
     "\\resources\\views\\layouts",
     "\\routes",
     "\\storage"
   ],
-  "SelectedNode": "\\app\\Http\\Controllers\\MemeController.php",
+  "SelectedNode": "\\app\\Http\\Controllers\\ProfileController.php",
   "PreviewInSolutionExplorer": false
 }

@@ -22,6 +22,7 @@ class CreateCommentsTable extends Migration
             $table->integer('dislikes');
             $table->foreignId('user_id')->constrained('users');
             $table->foreignId('meme_id')->constrained('memes');
+            $table->boolean('blocked')->nullable();
          
         });
     }

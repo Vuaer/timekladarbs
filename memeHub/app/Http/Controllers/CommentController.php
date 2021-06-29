@@ -98,6 +98,9 @@ class CommentController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $comment = Comment::findOrFail($id);
+        $comment->blocked = 1;
+        $comment->save();
+        return redirect('/meme/'.$comment->meme_id);
     }
 }
