@@ -53,13 +53,23 @@
                                     </div>
                                     </a>
                                     @if(Auth::check() and Auth::user()->id != $meme->user_id)
-                                    <div class="row">
-                                        <form method="POST" action="{{ action([App\Http\Controllers\LibraryController::class, 'store']) }}">
-                                            @csrf
-                                            <input type="hidden" name="meme_id" value="{{ $meme->id }}">
-                                            <input type="submit" class="btn btn-secondary" value="Save meme to library">
-                                        </form>
-                                     </div>
+                                        @if(!Auth::user()->library->library_memes($meme->id))
+                                        <div class="row">
+                                            <form method="POST" action="{{ action([App\Http\Controllers\LibraryController::class, 'store']) }}">
+                                                @csrf
+                                                <input type="hidden" name="meme_id" value="{{ $meme->id }}">
+                                                <input type="submit" class="btn btn-secondary" value="Save meme to library">
+                                            </form>
+                                         </div>
+                                         @else
+                                         <div class="row">
+                                            <form action='/profile/library/{{Auth::user()->library->library_meme($meme->id)->id}}' method="POST">
+                                                @method('DELETE')
+                                                @csrf
+                                                <input type="submit" value="{{ __('showmeme.Delete from library') }}" class="btn btn-danger">
+                                             </form>
+                                         </div>
+                                        @endif
                                     @endif
                                     <div class='col-4'>
                                         <div class="row">
