@@ -57,13 +57,17 @@
                                     </div>
                                     </a>
                                     @if(Auth::check() and Auth::user()->id != $meme->user_id)
-                                    <div class="row">
-                                        <form method="POST" action="{{ action([App\Http\Controllers\LibraryController::class, 'store']) }}">
-                                            @csrf
-                                            <input type="hidden" name="meme_id" value="{{ $meme->id }}">
-                                            <input type="submit" class="btn btn-secondary" value="Save meme to library">
-                                        </form>
-                                     </div>
+                                        @if(!Auth::user()->library->library_memes($meme->id))
+                                        <div class="row">                                         
+                                            <button id="btn-add_{{$meme->id}}" class="btn btn-secondary" onclick="library_add({{$meme->id}})">Save meme to library</button>
+                                            <button id="btn-remove_{{$meme->id}}" class="btn btn-danger d-none" onclick="library_remove({{$meme->id}})">{{ __('showmeme.Delete from library') }}</button>
+                                        </div>
+                                        @else
+                                        <div class="row">
+                                            <button id="btn-add_{{$meme->id}}" class="btn btn-secondary d-none" onclick="library_add({{$meme->id}})">Save meme to library</button>
+                                            <button id="btn-remove_{{$meme->id}}" class="btn btn-danger" onclick="library_remove({{$meme->id}})">Delete from library</button>
+                                        </div>
+                                        @endif
                                     @endif
                                     <div class='col-4'>
                                         <div class="row">
@@ -125,6 +129,50 @@
     </div>
 </div>
     <script>
+function library_add(meme_id)
+{
+    console.log(meme_id);
+    var url = "{{ route('library.store') }}";
+    var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+    $.ajax
+    ({
+        type: "Post",
+        url:url,
+        data: {meme_id: meme_id, _token: CSRF_TOKEN },
+        success: function (result)
+                {
+                    $("#btn-add_"+meme_id).addClass("d-none disabled");
+                    $('#btn-remove_'+meme_id).removeClass('d-none disabled');
+                },
+                
+        error: function (data)
+        {
+            console.log('Error:',data);
+        }
+    });
+}
+function library_remove(meme_id)
+{
+    console.log(meme_id);
+    var url = "{{ route('library.remove') }}";
+    var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+    $.ajax
+    ({
+        type: "Post",
+        url:url,
+        data: {meme_id: meme_id, _token: CSRF_TOKEN },
+        success: function (result)
+                {
+                    $("#btn-add_"+meme_id).removeClass("d-none disabled");
+                    $('#btn-remove_'+meme_id).addClass('d-none disabled');
+                },
+                
+        error: function (data)
+        {
+            console.log('Error:',data);
+        }
+    });
+}
 function a(meme_id, like)
 {
     console.log(meme_id);

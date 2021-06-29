@@ -25,11 +25,11 @@
                                 <h6 class="btn btn-warning">{{ __('showmeme.Add comment') }}</h6>
                             </div>
                             <div class="row justify-content-end">
-                                <form action='/profile/library/{{$lib_meme->id}}' method="POST">
+                                <!--<form action='/profile/library/{{$lib_meme->id}}' method="POST">
                                     @method('DELETE')
                                     @csrf
                                     <input type="submit" value="{{ __('showmeme.Delete from library') }}" class="btn btn-danger">
-                                </form>
+                                </form>-->
 
                             </div>
 

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Comment;
 use Auth;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Gate;
 
 class CommentController extends Controller
 {

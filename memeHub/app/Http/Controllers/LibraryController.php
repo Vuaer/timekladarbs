@@ -49,7 +49,13 @@ class LibraryController extends Controller
         $meme->library_id = $library->id;
         $meme->save();
 
-        return redirect('dashboard');
+        return response()->json(['meme_id'=>$meme->id]);
+    }
+    public function remove(Request $request)
+    {
+        $meme = Library_meme::where('meme_id',$request->meme_id)->first();
+        $meme->delete();
+        return response()->json(['meme_id'=>$meme->meme_id]);
     }
 
     /**
@@ -93,7 +99,7 @@ class LibraryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
         $meme = Library_meme::findOrFail($id);
         $meme->delete();
