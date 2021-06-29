@@ -41,6 +41,7 @@ Route::delete('/meme/{id}',[MemeController::class,'destroy']);
 Route::get('/search',[MemeController::class,'search'])->name("meme.search");
 Route::get('/sort/likes',[MemeController::class,'sortByLikes'])->name("sort.likes");
 Route::get('/sort/title',[MemeController::class,'sortByTitle'])->name("sort.title");
+Route::get('/adapt',[MemeController::class,'recentlySearched'])->name('adapt');
 
 
 

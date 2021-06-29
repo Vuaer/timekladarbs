@@ -115,14 +115,17 @@
                     </div>
                     <div class="row justify-content-center">
                         {{$memes->links("pagination::bootstrap-4")}}
-                    </div> 
+                    </div>
                 </div>
             </div>
         </div>
         @if(Auth::check())
         <div class="col-2">
             <div class="row justify-content-center mt-5">
-                <a href="{{route('personalize')}}" class="text-success p-1">Memes for you</a>
+                <a href="{{route('personalize')}}" class="text-success">Memes for you</a>
+            </div>
+            <div class="row justify-content-center mt-3 ml-2">
+                <a href="{{route('adapt')}}" class="text-success">Recently searched</a>
             </div>
         </div>
         @endif

@@ -18,6 +18,7 @@ use App\Models\Library;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\DB;
 use App\Models\User_keyword;
+use App\Models\Searched_meme;
 
 class MemeController extends Controller
 {
@@ -31,13 +32,13 @@ class MemeController extends Controller
 
     }
     
-    public function index($personalized=0,$content=NULL)
+    public function index($modified=0,$content=NULL)
     {
         if(Auth::check())
         {
             $liked_memes_ids=Like::where('user_id','=',Auth::user()->id)->pluck('meme_id')->toArray();
             $disliked_memes_ids=Dislike::where('user_id','=',Auth::user()->id)->pluck('meme_id')->toArray();
-            if($personalized==0){
+            if($modified==0){
                 $memes=Meme::orderBy('id','DESC')->paginate(3);
                 return view('dashboard',compact('memes','liked_memes_ids','disliked_memes_ids'));
                 }
@@ -216,19 +217,28 @@ class MemeController extends Controller
     {
         $memes_ids=Keyword::where('keyword','like',$request->keyword)->pluck('meme_id')->toArray();
         $memes_ids2=Meme::where('title','like',$request->keyword)->pluck('id');
+        $memes=Meme::whereIn('id',$memes_ids)->orWhereIn('id',$memes_ids2)->orderBy('id','DESC')->get();
+        foreach ($memes as $meme)
+        {
+            $searched_meme=new Searched_meme;
+            $searched_meme->user_id=Auth::user()->id;
+            $searched_meme->meme_id=$meme->id;
+            $searched_meme->save();
+        }
         $memes=Meme::whereIn('id',$memes_ids)->orWhereIn('id',$memes_ids2)->orderBy('id','DESC')->paginate(3);
-        if(Auth::check())
-        {
-            $liked_memes_ids=Like::where('user_id','=',Auth::user()->id)->pluck('meme_id')->toArray();
-            $disliked_memes_ids=Dislike::where('user_id','=',Auth::user()->id)->pluck('meme_id')->toArray();
-            return view('dashboard',compact('memes','liked_memes_ids','disliked_memes_ids'));
-        }
-        else
-        {
-           $liked_memes_ids=array();
-           $disliked_memes_ids=array();
-           return view('dashboard', compact('memes','liked_memes_ids','disliked_memes_ids')); 
-        }
+        return $this->index(1,$memes);
+//        if(Auth::check())
+//        {
+//            $liked_memes_ids=Like::where('user_id','=',Auth::user()->id)->pluck('meme_id')->toArray();
+//            $disliked_memes_ids=Dislike::where('user_id','=',Auth::user()->id)->pluck('meme_id')->toArray();
+//            return view('dashboard',compact('memes','liked_memes_ids','disliked_memes_ids'));
+//        }
+//        else
+//        {
+//           $liked_memes_ids=array();
+//           $disliked_memes_ids=array();
+//           return view('dashboard', compact('memes','liked_memes_ids','disliked_memes_ids')); 
+//        }
     }
     
     public function download($id)
@@ -257,5 +267,16 @@ class MemeController extends Controller
     {
         $memes=Meme::orderBy('title')->paginate(3);
         return $this->index(1,$memes);
+    }
+    
+    public function recentlySearched()
+    {
+        $memes=Searched_meme::where('user_id','=',Auth::user()->id)->latest()->take(3);
+//        foreach($memes as $meme){
+//            echo $meme->meme();
+//        }
+        $memes_ids=Searched_meme::where('user_id','=',Auth::user()->id)->latest()->take(3)->pluck('meme_id');
+        $memes=Meme::whereIn('id',$memes_ids)->paginate(3);
+        return $this->index(1,$memes);  
     }
 }
