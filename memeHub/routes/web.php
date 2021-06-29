@@ -54,6 +54,7 @@ Route::post('/ban/{id}',[ProfileController::class,'ban']);
 Route::resource('library',LibraryController::class);
 Route::get('/profile/library',[LibraryController::class,'index']);
 Route::post('/profile/library/remove',[LibraryController::class,'remove'])->name('library.remove');
+Route::delete('/profile/library/{id}',[LibraryController::class,'destroy']);
 
 Route::get('/create',[CreateController::class,'index']);
 Route::get('/profile/upload',[UploadController::class,'index']);
