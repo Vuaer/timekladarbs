@@ -65,6 +65,7 @@ Route::get('/profile/mymemes',[LibraryController::class,'showmymemes']);
 
 Route::get('/meme/{id}',[MemeController::class,'show']);
 Route::resource('comment',CommentController::class);
+Route::delete('/comment/{id}',[MemeController::class,'destroy']);
 
 Route::post('meme/like',[MemeController::class,'like'])->name("meme.like");
 Route::post('meme/dislike',[MemeController::class,'dislike'])->name("meme.dislike");

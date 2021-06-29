@@ -77,8 +77,20 @@
                             </form>
                             @foreach($meme->comments as $comment)
                             <div >
+                                @if($comment->blocked == 1)
+                                <strong>{{ $comment->user->name }}</strong>
+                                <p style="font-style:italic;">*Comment was deleted by moderator*</p>                               
+                                @else
                                 <strong>{{ $comment->user->name }}</strong>
                                 <p>{{ $comment->comment_text }}</p>
+                                @can('is-moder')
+                                    <form action='/comment/{{$comment->id}}' method="POST">
+                                        @method('DELETE')
+                                        @csrf
+                                        <input type="submit" value="{{ __('showmeme.Delete') }}" class="btn btn-danger">
+                                    </form>  
+                                @endcan
+                                @endif
                             </div>
                             @endforeach
                         </div>
