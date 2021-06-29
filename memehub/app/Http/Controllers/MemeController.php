@@ -42,7 +42,6 @@ class MemeController extends Controller
                 return view('dashboard',compact('memes','liked_memes_ids','disliked_memes_ids'));
                 }
             else{
-                //return $content;
                 $memes=$content;
                 return view('dashboard',compact('memes','liked_memes_ids','disliked_memes_ids'));
                 }
@@ -215,8 +214,9 @@ class MemeController extends Controller
     
     public function search(Request $request)
     {
-        $memes_ids=Keyword::where('keyword','like','%'.$request->keyword.'%')->pluck('meme_id')->toArray();
-        $memes=DB::table('memes')->whereIn('id',$memes_ids)->paginate(5);
+        $memes_ids=Keyword::where('keyword','like',$request->keyword)->pluck('meme_id')->toArray();
+        $memes_ids2=Meme::where('title','like',$request->keyword)->pluck('id');
+        $memes=Meme::whereIn('id',$memes_ids)->orWhereIn('id',$memes_ids2)->orderBy('id','DESC')->paginate(3);
         if(Auth::check())
         {
             $liked_memes_ids=Like::where('user_id','=',Auth::user()->id)->pluck('meme_id')->toArray();
@@ -244,6 +244,18 @@ class MemeController extends Controller
         $user_keywords=User_keyword::where('user_id','=',Auth::user()->id)->pluck('keyword');
         $memes_ids=Keyword::select('meme_id')->whereIn('keyword',$user_keywords)->pluck('meme_id');
         $memes=Meme::whereIn('id',$memes_ids)->orderBy('id','DESC')->paginate(3);
+        return $this->index(1,$memes);
+    }
+    
+    public function sortByLikes()
+    {
+        $memes=Meme::orderBy('likes','DESC')->paginate(3);
+        return $this->index(1,$memes);
+    }
+    
+    public function sortByTitle()
+    {
+        $memes=Meme::orderBy('title')->paginate(3);
         return $this->index(1,$memes);
     }
 }

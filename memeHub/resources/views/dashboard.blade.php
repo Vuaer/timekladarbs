@@ -4,14 +4,18 @@
     <h2 class="font-semibold text-xl text-gray-800 leading-tight">
         {{ __('dashboard.Dashboard') }}
     </h2>
+    <div class="row justify-content-center">
+        <a href="{{route('sort.likes')}}" style="color:black">Sort by likes</a>
+        <a href="{{route('sort.title')}}" class='ml-5' style="color:black">Sort by title</a>
+    </div>
 </x-slot>
 <div class='container'>
     <div class='row justify-content-center'>
         <div class='col-md-10'>
             <div class="card">
                 <div class="card-header">
-                    <h4>{{ __('dashboard.Upload meme') }}</h4>
                     @if(Auth::check())
+                    <h4>{{ __('dashboard.Upload meme') }}</h4>                
                     <form action='/meme' enctype="multipart/form-data" method="POST">
                         @csrf
                         <div class='form-group'>
@@ -111,11 +115,13 @@
                 </div>
             </div>
         </div>
+        @if(Auth::check())
         <div class="col-2">
             <div class="row justify-content-center mt-5">
                 <a href="{{route('personalize')}}" class="text-success p-1">Memes for you</a>
             </div>
         </div>
+        @endif
     </div>
 </div>
     <script>

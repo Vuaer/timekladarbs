@@ -39,6 +39,9 @@ Route::post('/meme',[MemeController::class,'upload']);
 Route::get('/personalize',[MemeController::class,'personalize'])->name('personalize');
 Route::delete('/meme/{id}',[MemeController::class,'destroy']);
 Route::get('/search',[MemeController::class,'search'])->name("meme.search");
+Route::get('/sort/likes',[MemeController::class,'sortByLikes'])->name("sort.likes");
+Route::get('/sort/title',[MemeController::class,'sortByTitle'])->name("sort.title");
+
 
 
 
