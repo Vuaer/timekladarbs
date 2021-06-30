@@ -19,6 +19,7 @@ use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\DB;
 use App\Models\User_keyword;
 use App\Models\Searched_meme;
+use Illuminate\Support\Facades\File; 
 
 class MemeController extends Controller
 {
@@ -213,6 +214,7 @@ class MemeController extends Controller
             {
                 $comment->delete();
             }
+            File::delete($meme->meme);
             $meme->delete();
         }
         return redirect()->route('meme.index');
