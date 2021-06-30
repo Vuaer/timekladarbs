@@ -20,28 +20,11 @@
         </div>
     </div>
     @can('is-moder')
-    <div>
-        <h3>Administrators:</h3>
-        @foreach($administrators as $administrator)
-        <div class="d-inline-block px-auto" style="border-style:solid; border-color:black; border-width:2px;">
-           <p style="font-weight:bold; font-size:20px;"> {{$administrator->name}} </p>
-        </div>
-        @endforeach
-        <h3>Moderators:</h3>
-        @foreach($moderators as $moderator)
-        <div>
-           <p style="font-weight:bold; font-size:20px;"> {{$moderator->name}} </p>
-        </div>
-        @endforeach
-    </div>
-    @endcan
-
-    @can('is-moder')
     <h3>Find user:</h3>
     <div class="flex mt-9">
         <form action='/profile' method="GET">
         @csrf
-            <input type="text" name="name" placeholder="Enter username" class="form-control @error('name') is-invalid @enderror">
+            <input type="text" name="name" placeholder="Enter username">
             <x-button type="submit">Search</x-button>
         </form>
     </div>
@@ -81,9 +64,19 @@
                     @method('PUT')
                     <div class='col-3'>
                     <label for="name">{{ __('profile.Name') }}:</label>
-                    <input type="text" name="name" id="name" value="{{Auth::user()->name}}" class="mb-1">
+                    <input type="text" style="width:250px;" name="name" id="name" value="{{Auth::user()->name}}" class="mb-1 form-control @error('name') is-invalid @enderror">
+                    @error('name')
+                        <span class="invalid-feedback">
+                            <strong>{{$message}}</strong>
+                        </span>
+                    @enderror
                     <label for="email">{{ __('profile.Email') }}</label>
-                    <input type="email" name="email" id="name" value="{{Auth::user()->email}}" class='mb-3'>
+                    <input type="email" style="width:250px;" name="email" id="name" value="{{Auth::user()->email}}" class='mb-3 form-control @error('email') is-invalid @enderror'>
+                    @error('email')
+                        <span class="invalid-feedback">
+                            <strong>{{$message}}</strong>
+                        </span>
+                    @enderror
                     <label for="keyword">{{ __('profile.Keywords') }}:</label>
                     @foreach($keywords as $keyword)
                     <input type="text" id="keyword" value="{{$keyword}}" disabled class='mt-2'>
