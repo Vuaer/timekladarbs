@@ -111,9 +111,16 @@ class MemeController extends Controller
     public function show($id)
     {
         $meme = Meme::findOrFail($id);
-        Like::where('user_id','=',Auth::user()->id)->where('meme_id','=',$id)->exists()?$isliked=1:$isliked=0;
-        Dislike::where('user_id','=',Auth::user()->id)->where('meme_id','=',$id)->exists()?$isdisliked=1:$isdisliked=0;
-        return view('show',compact('meme','isliked','isdisliked'));
+        if(Auth::check())
+        {
+            Like::where('user_id','=',Auth::user()->id)->where('meme_id','=',$id)->exists()?$isliked=1:$isliked=0;
+            Dislike::where('user_id','=',Auth::user()->id)->where('meme_id','=',$id)->exists()?$isdisliked=1:$isdisliked=0;
+            return view('show',compact('meme','isliked','isdisliked'));
+        }
+        else
+        {
+            return view('show',compact('meme'));
+        }
     }
 
     /**
