@@ -58,14 +58,14 @@
                                     </a>
                                     @if(Auth::check() and Auth::user()->id != $meme->user_id)
                                         @if(!Auth::user()->library->library_memes($meme->id))
-                                        <div class="row">                                         
-                                            <button id="btn-add_{{$meme->id}}" class="btn btn-secondary" onclick="library_add({{$meme->id}})">Save meme to library</button>
-                                            <button id="btn-remove_{{$meme->id}}" class="btn btn-danger d-none" onclick="library_remove({{$meme->id}})">{{ __('showmeme.Delete from library') }}</button>
+                                        <div class="col-2">                                         
+                                            <button id="btn-add_{{$meme->id}}" title="Add to library" class="btn btn-secondary" onclick="library_add({{$meme->id}})"><i class="fa fa-plus"></i></button>
+                                            <button id="btn-remove_{{$meme->id}}" title="Remove from library" class="btn btn-danger d-none" onclick="library_remove({{$meme->id}})"><i class="fa fa-minus"></i></button>
                                         </div>
                                         @else
-                                        <div class="row">
-                                            <button id="btn-add_{{$meme->id}}" class="btn btn-secondary d-none" onclick="library_add({{$meme->id}})">Save meme to library</button>
-                                            <button id="btn-remove_{{$meme->id}}" class="btn btn-danger" onclick="library_remove({{$meme->id}})">Delete from library</button>
+                                        <div class="col-2">
+                                            <button id="btn-add_{{$meme->id}}" title="Add to library" class="btn btn-secondary d-none" onclick="library_add({{$meme->id}})"><i class="fa fa-plus"></i></button>
+                                            <button id="btn-remove_{{$meme->id}}" title="Remove from library" class="btn btn-danger" onclick="library_remove({{$meme->id}})"><i class="fa fa-minus"></i></button>
                                         </div>
                                         @endif
                                     @endif
