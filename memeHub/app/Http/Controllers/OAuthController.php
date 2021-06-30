@@ -7,6 +7,7 @@ use Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Laravel\Socialite\Facades\Socialite;
+use App\Models\Library;
 
 
 
@@ -44,7 +45,10 @@ class OAuthController extends Controller
             $user->email=$data->email;
             $user->name=$data->name;
             $user->provider_id=$data->id;
-            $user->save(); 
+            $user->save();
+            $library = new Library;
+            $library->user_id = $user->id;
+            $library->save();
         }
         Auth::login($user);
     }
