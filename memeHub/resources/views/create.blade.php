@@ -2,13 +2,14 @@
 <x-app-layout>
 <x-slot name="header">
     <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-        Create meme
+        {{ __('creatememe.Create meme') }}
     </h2>
 </x-slot>
 <div class='container'>
     <div class='row justify-content-center'>
         <div class='col-md-10'>
             <div class="card">
+            <h4>{{ __('creatememe.Choose meme template') }}</h4>
                 <ul class="thumbnails" style="width: 920px; margin: 0 auto;">
                             <?php    
                             @pastetemplates();

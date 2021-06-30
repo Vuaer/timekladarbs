@@ -11,5 +11,8 @@ return [
     'Second text'=>'Otrais teksts',
     'Upload'=>'Augšupielādēt',
     'Your text'=>'Jūsu teksts',
-    'Your title'=>'Jūsu nosaukums'
+    'Your title'=>'Jūsu nosaukums',
+    'Create meme'=>'Izveidojiet memu',
+    'Choose meme template'=>'Izvēlieties meme veidni'
+
 ];

@@ -21,5 +21,10 @@ return [
     'Password'=>'Parole',
     'Remember me'=>'Atceries mani',
     'Forgot your password?'=>'Aizmirsi savu paroli?',
-    'Log in'=>'Pieslēgties'
+    'Log in'=>'Pieslēgties',
+    'Name'=>'Vārds',
+    'Confirm Password'=>'Apstipriniet paroli',
+    'Already registered?'=>'Esat reģistrējies?'
+    
+ 
 ];

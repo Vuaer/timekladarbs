@@ -16,5 +16,10 @@ return [
     'Upload'=>'Augšupielādēt',
     'Delete'=>'Dzēst',
     'Enter title'=>'Ievadiet nosaukumu',
-    'Enter keyword'=>'Ievadiet atslēgvārdu'
+    'Enter keyword'=>'Ievadiet atslēgvārdu',
+    'Sort by likes'=>'Kārtot pēc "laikiem"',
+    'Sort by title'=>'Kārtot pēc nosaukuma',
+    'Memes for you'=>'Memes jums',
+    'Recently searched'=>'Nesen meklēti',
+    'Meme list'=>'Meme saraksts'
 ];

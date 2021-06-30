@@ -15,7 +15,12 @@ return [
     'Name'=>'Name',
     'Email'=>'Email',
     'Update'=>'Update',
-    'Search'=>'Search'
+    'Search'=>'Search',
+    'Profile'=>'Profile',
+    'Keywords'=>'Keywords',
+    'You haven\'t any keywords!'=>'You haven\'t any keywords!',
+    'Add'=>'Add',
+    
     
     
 ];

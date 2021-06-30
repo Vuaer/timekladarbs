@@ -21,5 +21,9 @@ return [
     'Password'=>'Password',
     'Remember me'=>'Remember me',
     'Forgot your password?'=>'Forgot your password?',
-    'Log in'=>'Log in'
+    'Log in'=>'Log in',
+    'Name'=>'Name',
+    'Confirm Password'=>'Confirm Password',
+    'Already registered?'=>'Already registered?'
+    
 ];

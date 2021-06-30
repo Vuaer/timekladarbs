@@ -80,21 +80,21 @@
                     @csrf
                     @method('PUT')
                     <div class='col-3'>
-                    <label for="name">Name:</label>
+                    <label for="name">{{ __('profile.Name') }}:</label>
                     <input type="text" name="name" id="name" value="{{Auth::user()->name}}" class="mb-1">
-                    <label for="email">Email</label>
+                    <label for="email">{{ __('profile.Email') }}</label>
                     <input type="email" name="email" id="name" value="{{Auth::user()->email}}" class='mb-3'>
-                    <label for="keyword">Keywords:</label>
+                    <label for="keyword">{{ __('profile.Keywords') }}:</label>
                     @foreach($keywords as $keyword)
                     <input type="text" id="keyword" value="{{$keyword}}" disabled class='mt-2'>
                     <a href='{{url('profile/delete/'.$keyword)}}' class="btn"><i class='fa fa-trash'></i></a>
                     @endforeach
                     @empty($keywords)
-                    <p style="color:red">You haven't any keywords!</p>
+                    <p style="color:red">{{ __('profile.You haven\'t any keywords!') }}</p>
                     @endempty
                     </div>
                         <div class="mt-4" id="toAppend">
-                            <label for="keyword_new">Add:</label>
+                            <label for="keyword_new">{{ __('profile.Add') }}:</label>
                             <select id="keyword_new" name='keyword' class="mb-3 mr-2">
                                 @foreach($meme_keywords as $meme_keyword)
                                 <option value="{{$meme_keyword}}">{{$meme_keyword}}</option>
@@ -102,7 +102,7 @@
                             </select>
                         </div>
                         <button type="button" class="btn btn-light" id="btn-add" onclick="newform()"><i class="fa fa-plus"></i></button>
-                    <input type="submit" value="Update" class="btn btn-primary ml-2"> 
+                    <input type="submit" value="{{ __('profile.Update') }}" class="btn btn-primary ml-2"> 
                 </form>
             </div>
         </div>
