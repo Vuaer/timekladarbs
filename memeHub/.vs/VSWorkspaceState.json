@@ -3,14 +3,15 @@
     "",
     "\\app",
     "\\app\\Http",
-    "\\app\\Http\\Requests\\Auth",
-    "\\app\\Models",
+    "\\app\\Http\\Controllers",
+    "\\database",
+    "\\database\\migrations",
     "\\resources",
     "\\resources\\views",
     "\\resources\\views\\layouts",
     "\\routes",
     "\\storage"
   ],
-  "SelectedNode": "\\app\\Http\\Controllers\\ProfileController.php",
+  "SelectedNode": "\\resources\\views\\library.blade.php",
   "PreviewInSolutionExplorer": false
 }
