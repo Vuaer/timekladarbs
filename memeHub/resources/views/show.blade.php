@@ -10,10 +10,28 @@
                     <div class='container mt-2'>
                         <div class='row justify-content-center'>
                         <div class='col-md-8'>       
-                            <div class='card m-3'>
-                                <img src='{{ asset($meme->meme)}}' class="card-img-top pb-5 " alt='something' >
-                                <div class='col-4'>
-                                     <div class="row">
+                            <div class='card m-3 border border-primary'>
+                                <div class="row justify-content-center mt-2 ">
+                                    <p class="lead">{{$meme->title}}</p>
+                                </div>
+                                <div class="row justify-content-end mr-3">{{ __('dashboard.User') }}:{{$meme->user->name}}</div>
+                                <img src='{{ asset($meme->meme)}}' class="card-img-top" alt='something'>
+                                <div class='row align-items-center'>
+                                    @if(Auth::check() and Auth::user()->id != $meme->user_id)
+                                        @if(!Auth::user()->library->library_memes($meme->id))
+                                        <div class="col-2">                                         
+                                            <button id="btn-add_{{$meme->id}}" title="Add to library" class="btn btn-secondary" onclick="library_add({{$meme->id}})"><i class="fa fa-plus"></i></button>
+                                            <button id="btn-remove_{{$meme->id}}" title="Remove from library" class="btn btn-danger d-none" onclick="library_remove({{$meme->id}})"><i class="fa fa-minus"></i></button>
+                                        </div>
+                                        @else
+                                        <div class="col-2">
+                                            <button id="btn-add_{{$meme->id}}" title="Add to library" class="btn btn-secondary d-none" onclick="library_add({{$meme->id}})"><i class="fa fa-plus"></i></button>
+                                            <button id="btn-remove_{{$meme->id}}" title="Remove from library" class="btn btn-danger" onclick="library_remove({{$meme->id}})"><i class="fa fa-minus"></i></button>
+                                        </div>
+                                        @endif
+                                    @endif
+                                    <div class='col-4'>
+                                        <div class="row">
                                      @if(Auth::check())
                                    
                                      @if($isliked)
@@ -35,28 +53,24 @@
                                          <div class="col-2" id="likes_{{$meme->id}}">{{$meme->likes}}</div>
                                          <div class="col-2" id="dislikes_{{$meme->id}}"> {{$meme->dislikes}}</div> 
                                      </div>
-                                     <div class="row">
-                                        <form method="POST" action="{{ action([App\Http\Controllers\LibraryController::class, 'store']) }}">
-                                            @csrf
-                                            <input type="hidden" name="meme_id" value="{{ $meme->id }}">
-                                            <input type="submit" class="btn btn-secondary" value="Save meme to library">
-                                        </form>
-                                     </div>
-                                        
-                                     
-                                 </div>
+                                    </div>
+                                    <div class ="col-1">
+                                        <a href="/meme/download/{{$meme->id}}"><i class="fa fa-download"></i></a>
+                                    </div>
+                                </div>
                             </div>
+
                         @if(Auth::check())
                         @if($meme->user_id==Auth::user()->id || Auth::user()->isModer())
                         <div class="row justify-content-end">
                             <form action='/meme/{{$meme->id}}' method="POST">
                                 @method('DELETE')
                                 @csrf
-                                <input type="submit" value="{{ __('showmeme.Delete') }}" class="btn btn-danger">
-                            </form>      
+                                <input type="submit" value="{{ __('dashboard.Delete') }}" class="btn btn-danger">
+                            </form>
                         </div>
                         @endif
-                        @endif 
+                        @endif
                         <div >
                             <h5>{{ __('showmeme.Add comment') }}:</h5>
                             <form method="POST" action="{{ action([App\Http\Controllers\CommentController::class, 'store']) }}">
@@ -104,6 +118,50 @@
     </div>
 </div>
     <script>
+    function library_add(meme_id)
+{
+    console.log(meme_id);
+    var url = "{{ route('library.store') }}";
+    var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+    $.ajax
+    ({
+        type: "Post",
+        url:url,
+        data: {meme_id: meme_id, _token: CSRF_TOKEN },
+        success: function (result)
+                {
+                    $("#btn-add_"+meme_id).addClass("d-none disabled");
+                    $('#btn-remove_'+meme_id).removeClass('d-none disabled');
+                },
+                
+        error: function (data)
+        {
+            console.log('Error:',data);
+        }
+    });
+}
+function library_remove(meme_id)
+{
+    console.log(meme_id);
+    var url = "{{ route('library.remove') }}";
+    var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+    $.ajax
+    ({
+        type: "Post",
+        url:url,
+        data: {meme_id: meme_id, _token: CSRF_TOKEN },
+        success: function (result)
+                {
+                    $("#btn-add_"+meme_id).removeClass("d-none disabled");
+                    $('#btn-remove_'+meme_id).addClass('d-none disabled');
+                },
+                
+        error: function (data)
+        {
+            console.log('Error:',data);
+        }
+    });
+}
 function a(meme_id, like)
 {
     console.log(meme_id);
