@@ -40,8 +40,9 @@ class CreateController extends Controller
      */
     public function upload(Request $request)
     {
-       $template = Template::findOrFail(1);
        $id = $request->img;
+//       $ids = explode(".", $id, 2);
+       $template = Template::where('name', "$id")->firstOrFail();
        $txt1= $request->textinput1;
        $txt2= $request->textinput2;
        $name = $request->imgname;
@@ -55,10 +56,10 @@ class CreateController extends Controller
         $y2= $template->positiony2;
        // return $x2;
         $img = imagecreatefromjpeg($imgPath);
-        $white = imagecolorallocate($img, 0xFF, 0xFF, 0xFF);
+        $white = imagecolorallocate($img, 0, 0, 0);
         $font = "C:\Windows\Fonts\arial.ttf"; 
-        imagettftext($img, 32, 0, $x1, $y1, $white, $font, $txt1);
-        imagettftext($img, 32, 0, $x2, $y2, $white, $font, $txt2);
+        imagettftext($img, 40, 0, $x1, $y1, $white, $font, $txt1);
+        imagettftext($img, 40, 0, $x2, $y2, $white, $font, $txt2);
                         $finalname = time().$name;
                         $templatedonelink = "memes/$finalname.jpg";                       
                         imagejpeg($img, $templatedonelink, 100);
