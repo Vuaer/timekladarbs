@@ -11,6 +11,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use App\Models\Library;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\Welcome;
 
 class RegisteredUserController extends Controller
 {
@@ -53,6 +55,9 @@ class RegisteredUserController extends Controller
         $library = new Library;
         $library->user_id = Auth::user()->id;
         $library->save();
+        
+        $name=$user->name;
+        Mail::to($user->email)->send(new Welcome($name));
 
         return redirect('/meme');
     }

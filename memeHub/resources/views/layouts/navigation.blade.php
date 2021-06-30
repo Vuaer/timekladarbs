@@ -70,7 +70,7 @@
             </div>
             @endif
             @if(Auth::guest())
-            <div class="flex mt-8 bg-gray-800 border border-transparent rounded-md font-semibold inline-flex items-center px-4 py-2">            
+            <div class="flex mt-3 bg-gray-800 border border-transparent rounded-md font-semibold inline-flex items-center px-4 mb-3">            
                 <x-nav-link :href="route('login')" :active="request()->routeIs('Login')" class="text-white">{{__('navigation.Log in')}}</x-nav-link>         
             </div>
             @endif

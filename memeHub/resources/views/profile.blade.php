@@ -4,21 +4,25 @@
     <h2 class="font-semibold text-xl text-gray-800 leading-tight">
        {{ __('profile.Profile') }}
     </h2>
-</x-slot>
-<div class='container'>
     <div class='row justify-content-center'>
-        <div class='col-md-10'>
+        <div class='col-2'>
              <x-nav-link href="/profile/upload" :active="request()->routeIs('UploadController.index')">
                         {{ __('profile.Upload your meme') }}
              </x-nav-link>
+        </div>
+        <div class='col-1'>
              <x-nav-link href="/profile/library" :active="request()->routeIs('LibraryController.index')">
                         {{ __('profile.Library') }}
              </x-nav-link>
+        </div>
+        <div class='col-2'>
              <x-nav-link href="/profile/mymemes" :active="request()->routeIs('LibraryController.showmymemes')">
                         {{ __('profile.My memes') }}
              </x-nav-link>
         </div>
     </div>
+</x-slot>
+<div class='container mt-3'>
     @can('is-moder')
     <h3>Find user:</h3>
     <div class="flex mt-9">

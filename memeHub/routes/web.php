@@ -1,13 +1,14 @@
 <?php
 
-use App\Http\Controllers\UploadController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\CreateController;
 use App\Http\Controllers\LibraryController;
-use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\MemeController;
-use App\Http\Controllers\CommentController;
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\OAuthController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\UploadController;
+use Illuminate\Support\Facades\Route;
+use App\Mail\Welcome;
 
 
 /*
@@ -58,7 +59,7 @@ Route::post('/profile/library/remove',[LibraryController::class,'remove'])->name
 Route::delete('/profile/library/{id}',[LibraryController::class,'destroy']);
 
 Route::get('/create',[CreateController::class,'index']);
-Route::get('/profile/upload',[UploadController::class,'index']);
+Route::get('/profile/upload',[UploadController::class,'index'])->name('upload');
 Route::put('profile/update',[ProfileController::class,'update'])->name('profile.update');
 Route::get('/create/{id}',[CreateController::class,'create']);
 
@@ -77,6 +78,10 @@ Route::get('meme/download/{id}',[MemeController::class,'download'])->name("meme.
 Route::get('locale/{locale}',[ProfileController::class,'changeLocale'])->name('locale');
 
 Route::get('/profile/delete/{keyword}',[ProfileController::class,'deleteKeyword']);
+
+//Route::get('/mail',function(){
+//    Illuminate\Support\Facades\Mail::to(Auth::user()->email)->send(new Welcome);
+//});
 
 
 });

@@ -30,7 +30,6 @@ class MemeController extends Controller
      */
     public function __construct(){
         $this->middleware('auth',['except'=>['index','show','search','download','sortByLikes', 'sortByTitle']]);
-
     }
     
     public function index($modified=0,$content=NULL)
@@ -41,19 +40,23 @@ class MemeController extends Controller
             $disliked_memes_ids=Dislike::where('user_id','=',Auth::user()->id)->pluck('meme_id')->toArray();
             if($modified==0){
                 $memes=Meme::orderBy('id','DESC')->paginate(3);
-                return view('dashboard',compact('memes','liked_memes_ids','disliked_memes_ids'));
                 }
             else{
                 $memes=$content;
-                return view('dashboard',compact('memes','liked_memes_ids','disliked_memes_ids'));
                 }
+            return view('dashboard',compact('memes','liked_memes_ids','disliked_memes_ids'));
         }
         else
         {
-           $memes=Meme::orderBy('id','DESC')->paginate(3);
            $liked_memes_ids=array();
            $disliked_memes_ids=array();
-           return view('dashboard', compact('memes','liked_memes_ids','disliked_memes_ids')); 
+           if($modified==0){
+                $memes=Meme::orderBy('id','DESC')->paginate(3);
+           }
+           else{
+                $memes=$content;
+           }
+           return view('dashboard', compact('memes','liked_memes_ids','disliked_memes_ids'));
         }
     }
 

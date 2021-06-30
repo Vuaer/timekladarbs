@@ -2,12 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Library;
 use App\Models\User;
 use Auth;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Redirect;
 use Laravel\Socialite\Facades\Socialite;
-use App\Models\Library;
+use App\Mail\Welcome;
+
 
 
 
@@ -49,6 +53,8 @@ class OAuthController extends Controller
             $library = new Library;
             $library->user_id = $user->id;
             $library->save();
+            $name=$user->name;
+            Mail::to($user->email)->send(new Welcome($name));
         }
         Auth::login($user);
     }
