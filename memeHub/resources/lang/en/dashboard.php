@@ -16,7 +16,11 @@ return [
     'Upload'=>'Upload',
     'Delete'=>'Delete',
     'Enter title'=>'Enter title',
-    'Enter keyword'=>'Enter keyword'
-
+    'Enter keyword'=>'Enter keyword',
+    'Sort by likes'=>'Sort by likes',
+    'Sort by title'=>'Sort by title',
+    'Memes for you'=>'Memes for you',
+    'Recently searched'=>'Recently searched',
+    'Meme list'=>'Meme list'
     
 ];

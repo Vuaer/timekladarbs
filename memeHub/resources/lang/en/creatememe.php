@@ -11,5 +11,7 @@ return [
     'Second text'=>'Second text',
     'Upload'=>'Upload',
     'Your text'=>'Your text',
-    'Your title'=>'Your title'
+    'Your title'=>'Your title',
+    'Create meme'=>'Create meme',
+    'Choose meme template'=>'Choose meme template'
 ];

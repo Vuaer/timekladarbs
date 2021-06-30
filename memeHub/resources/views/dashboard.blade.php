@@ -5,8 +5,8 @@
         {{ __('dashboard.Dashboard') }}
     </h2>
     <div class="row justify-content-center">
-        <a href="{{route('sort.likes')}}" style="color:black">Sort by likes</a>
-        <a href="{{route('sort.title')}}" class='ml-5' style="color:black">Sort by title</a>
+        <a href="{{route('sort.likes')}}" style="color:black">{{ __('dashboard.Sort by likes') }}</a>
+        <a href="{{route('sort.title')}}" class='ml-5' style="color:black">{{ __('dashboard.Sort by title') }}</a>
     </div>
 </x-slot>
 <div class='container'>
@@ -36,7 +36,7 @@
                     </form>
                     @endif
                     @if(Auth::guest())
-                    Meme list
+                    {{ __('dashboard.Meme list') }}
                     @endif
                 </div>
                 <div class='card-body'>
@@ -122,10 +122,10 @@
         @if(Auth::check())
         <div class="col-2">
             <div class="row justify-content-center mt-5">
-                <a href="{{route('personalize')}}" class="text-success">Memes for you</a>
+                <a href="{{route('personalize')}}" class="text-success">{{ __('dashboard.Memes for you') }}</a>
             </div>
             <div class="row justify-content-center mt-3 ml-2">
-                <a href="{{route('adapt')}}" class="text-success">Recently searched</a>
+                <a href="{{route('adapt')}}" class="text-success">{{ __('dashboard.Recently searched') }}</a>
             </div>
         </div>
         @endif
