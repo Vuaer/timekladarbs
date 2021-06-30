@@ -81,7 +81,7 @@ class ProfileController extends Controller
     {
         $rules = array
                 (
-                    'days' => 'required | integer | min:0 | max:50000',
+                    'days' => 'required | integer | min:1 | max:50000',
                 );
         $this->validate($request,$rules);
 
