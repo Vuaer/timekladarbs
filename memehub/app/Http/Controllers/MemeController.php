@@ -29,7 +29,7 @@ class MemeController extends Controller
      * @return Response
      */
     public function __construct(){
-        $this->middleware('auth',['except'=>['index','show','search']]);
+        $this->middleware('auth',['except'=>['index','show','search','download','sortByLikes', 'sortByTitle']]);
 
     }
     

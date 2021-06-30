@@ -19,7 +19,33 @@
                                 <div class="row justify-content-center mt-2 ">
                                     <p class="lead">{{$lib_meme->meme->title}}</p>
                                 </div>
+                                @if(Auth::user()->role != 'moderator' and Auth::user()->role != 'administrator')
                                 <div class="row justify-content-end mr-3">{{ __('dashboard.User') }}:{{$lib_meme->meme->user->name}}</div>
+                                @endif
+                                @can('is-moder')
+                                <x-dropdown align="right" width="48">
+                                     <x-slot name="trigger">
+                                        <div class="row justify-content-end mr-3"><button class="flex-item pl-6 width-30">{{ __('dashboard.User') }}:{{$lib_meme->meme->user->name}}</button></div>
+                                     </x-slot>
+                             
+                                     <x-slot name="content" >
+                                            @can('is-admin')
+                                            <form method="GET" action="{{ action([App\Http\Controllers\ProfileController::class, 'findUser'], $lib_meme->meme->user->id) }}">
+                                            @csrf
+                                            <p>
+                                            <input type="submit" value="Change role">
+                                            </p>
+                                            </form>
+                                            @endcan
+                                           <form method="GET" action="{{ action([App\Http\Controllers\ProfileController::class, 'showBanUser'], $lib_meme->meme->user->id) }}">
+                                                @csrf
+                                                <p>
+                                                <input type="submit" value="Block">
+                                                </p>
+                                           </form>
+                                      </x-slot>
+                                </x-dropdown>
+                                @endcan
                                 @if(Auth::check())                     
                                 <a href="/meme/{{$lib_meme->meme->id}}" target="_blank">
                                     <div class='card m-3 bg-dark'>
