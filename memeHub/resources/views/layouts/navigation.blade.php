@@ -21,26 +21,26 @@
                     <x-nav-link href="/profile/library" :active="request()->routeIs('LibraryController.index')">
                         {{ __('navigation.Library') }}
                     </x-nav-link>
-                    <x-nav-link href="/create" :active="request()->routeIs('CreateController.index')">
+                    <x-nav-link href="/create" :active="request()->routeIs('CreateController.index')" class="mr-3">
                         {{ __('navigation.Create') }}
                     </x-nav-link>
-                    <a href="{{route('locale','lv')}}">{{ __('lv') }} </a> 
-                    <a href="{{route('locale','en')}}">{{ __('en') }} </a> 
+                    <a href="{{route('locale','lv')}}"class="m-auto pl-2">{{ __('lv') }} </a> 
+                    <a href="{{route('locale','en')}}" class="m-auto pl-4">{{ __('en') }} </a> 
                   
                     
                 </div>
             </div>
-            <div class="flex mt-9">
+            <div class="col-4 mt-2">
                 <form method="GET" action="{{route('meme.search')}}">
                     @csrf
-                    <input  type="text" name="keyword" required/>
+                    <input class="input-group-sm"  type="text" name="keyword" required>
                     <x-button type="submit"><i class='fa fa-search'></i></x-button>
                 </form>
             </div>
 
             <!-- Settings Dropdown -->
             @if(Auth::check())
-            <div class="hidden sm:flex sm:items-center sm:ml-6">
+            <div class="hidden sm:flex sm:items-center sm:ml-6 mb-4">
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
                         <button class="flex mt-8 bg-gray-800 border border-transparent rounded-md font-semibold inline-flex items-center px-4 py-2 text-white">
