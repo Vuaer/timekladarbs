@@ -76,7 +76,8 @@ class MemeController extends Controller
     {
         
         $this->validate($request,[
-            'meme'=>'required'
+            'meme'=>'required',
+            'title'=>'required | string | min:1'
         ]);
         $meme=$request->meme;
         $new_name=time().$meme->getClientOriginalName();
@@ -88,11 +89,15 @@ class MemeController extends Controller
         $upload->save();
         $keywords=$request->except(['meme','title','_token']);
         foreach ($keywords as $value){
-            $keyword=new Keyword;
-            $keyword->keyword=$value;
-            $keyword->meme_id=$upload->id;
-            $keyword->save();
+            if($value != NULL)
+            {
+                $keyword=new Keyword;
+                $keyword->keyword=$value;
+                $keyword->meme_id=$upload->id;
+                $keyword->save();
+            }
         }
+       
         return redirect()->route('meme.index');
     }
 
