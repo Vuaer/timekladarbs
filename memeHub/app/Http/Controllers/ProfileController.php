@@ -32,7 +32,7 @@ class ProfileController extends Controller
         {
             if($request->has('name') & $request->name != NULL)
             {
-                $users = User::Where('name','LIKE','%'.$request->name.'%')->orderBy("name","asc")->get();
+                $users = User::Where('name','LIKE','%'.$request->name.'%')->where('role','!=','administrator')->orderBy("name","asc")->get();
                 $moderators = User::where('role','=','moderator')->get();
                 $administrators = User::where('role','=','administrator')->get();
                 return view('profile',compact('moderators','administrators','users','keywords','meme_keywords'));
@@ -86,10 +86,13 @@ class ProfileController extends Controller
         $this->validate($request,$rules);
 
         $user = $user = User::findOrFail($id);
-        $currentDate = Carbon::now();
-        $currentDate = $currentDate->addDays($request->days);
-        $user->banned_until = $currentDate;
-        $user->save();
+        if($user->role != 'administrator')
+        {
+            $currentDate = Carbon::now();
+            $currentDate = $currentDate->addDays($request->days);
+            $user->banned_until = $currentDate;
+            $user->save();
+        }
         return redirect('profile');
     }
     /**
