@@ -3,14 +3,14 @@
 </x-slot>
 
 <div>
-    <h4>Username: {{$user->name}}</h4>
-    <p>Current role: {{$user->role}}</p>
+    <h4>{{ __('role.Username') }}: {{$user->name}}</h4>
+    <p>{{ __('role.Current role') }}:  {{$user->role}}</p>
 </div>
 
 <div>
     <form method="Post" action="{{ action([App\Http\Controllers\ProfileController::class, 'ban'],$user->id)}}">
     @csrf
-    <p>Ban user for <input style="width:200px;" id="days" type="text" name="days" > days</p>
+    <p>{{ __('role.Ban user for') }} <input style="width:200px;" id="days" type="text" name="days" > {{ __('role.days') }}</p>
     @if (count($errors) > 0)
                 <div>
                     <ul>
@@ -20,7 +20,7 @@
                     </ul>
                 </div>
              @endif
-    <input type="submit" class="btn" value="Ban" >
+    <input type="submit" class="btn" value="{{ __('role.Ban') }}" >
     </form>
 </div>
 </x-app-layout>

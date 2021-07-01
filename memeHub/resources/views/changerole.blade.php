@@ -3,19 +3,19 @@
 </x-slot>
 
 <div>
-    <h4>Username: {{$user->name}}</h4>
-    <p>Current role: {{$user->role}}</p>
+    <h4>{{ __('role.Username') }}: {{$user->name}}</h4>
+    <p>{{ __('role.Current role') }}: {{$user->role}}</p>
 </div>
 <div>
     <form method="Post" action="{{ action([App\Http\Controllers\ProfileController::class, 'changeRole'],$user->id)}}">
     @csrf
 
-    <label for="role"> Choose a role: </label>
+    <label for="role"> {{ __('role.Choose a role') }}: </label>
     
     <select name="role" id="role">
-        <option value="user">User</option>
-        <option value="moderator">Moderator</option>
-        <option value="administrator">Administrator</option>
+        <option value="user">{{ __('role.User') }}</option>
+        <option value="moderator">{{ __('role.Moderator') }}</option>
+        <option value="administrator">{{ __('role.Administrator') }}</option>
     </select>
     <input type="submit" class="btn">
     </form>
