@@ -50,4 +50,13 @@
         </div>
     </div>
 </div>
+<script>
+var number=0;
+function newform(){
+    $("#keyword").clone().attr("name","keyword"+number).appendTo("#toAppend");
+    console.log("keyword"+number);
+    number++;
+    //var copy=$("#keyword");
+}
+</script>
 </x-app-layout>

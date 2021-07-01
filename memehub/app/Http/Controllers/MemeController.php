@@ -235,12 +235,15 @@ class MemeController extends Controller
         $memes_ids=Keyword::where('keyword','like',$request->keyword)->pluck('meme_id')->toArray();
         $memes_ids2=Meme::where('title','like',$request->keyword)->pluck('id');
         $memes=Meme::whereIn('id',$memes_ids)->orWhereIn('id',$memes_ids2)->orderBy('id','DESC')->get();
-        foreach ($memes as $meme)
+        if(auth::check())
         {
-            $searched_meme=new Searched_meme;
-            $searched_meme->user_id=Auth::user()->id;
-            $searched_meme->meme_id=$meme->id;
-            $searched_meme->save();
+            foreach ($memes as $meme)
+            {
+                $searched_meme=new Searched_meme;
+                $searched_meme->user_id=Auth::user()->id;
+                $searched_meme->meme_id=$meme->id;
+                $searched_meme->save();
+            }
         }
         $memes=Meme::whereIn('id',$memes_ids)->orWhereIn('id',$memes_ids2)->orderBy('id','DESC')->paginate(3);
         return $this->index(1,$memes);

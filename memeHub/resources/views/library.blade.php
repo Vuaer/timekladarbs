@@ -8,14 +8,13 @@
 <div class='container'>
     <div class='row justify-content-center'>
         <div class='col-md-10'>
-            <div class="card">
-               
+            <div class="card">             
                 <div class='card-body'>
-                    <div class='container mt-2'>
+                        <div class='container mt-2'>
                         <div class='row justify-content-center'>
                         <div class='col-md-8'>
                         @forelse($memes as $lib_meme)
-                            <div class='card m-3 border border-primary'>
+                            <!--<div class='card m-3 border border-primary'>-->
                                 <div class="row justify-content-center mt-2 ">
                                     <p class="lead">{{$lib_meme->meme->title}}</p>
                                 </div>
@@ -58,9 +57,7 @@
                                         @csrf
                                         <input type="submit" value="{{ __('showmeme.Delete from library') }}" class="btn btn-danger">
                                     </form>
-                                    </div>
-                                <div class='col-4'>                      
-                                    </div>
+                                </div>
                                     <div class ="col-1">
                                         <a href="/meme/download/{{$lib_meme->meme->id}}"><i class="fa fa-download"></i></a>
                                     </div>
@@ -68,11 +65,10 @@
                                 @endif
                                 @empty
                                     <p>{{ __('showmeme.No memes') }}!</p>
-
                             </div>
                         @endforelse
-                        
                         </div>
+                        
                         </div>
                     </div>
                  </div>
