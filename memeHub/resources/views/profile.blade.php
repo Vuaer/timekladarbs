@@ -24,12 +24,12 @@
 </x-slot>
 <div class='container mt-3'>
     @can('is-moder')
-    <h3>Find user:</h3>
+    <h3>{{ __('profile.Find user') }}:</h3>
     <div class="flex mt-9">
         <form action='/profile' method="GET">
         @csrf
-            <input type="text" name="name" placeholder="Enter username">
-            <x-button type="submit">Search</x-button>
+            <input type="text" name="name" placeholder="{{ __('profile.Enter username') }}">
+            <x-button type="submit">{{ __('profile.Search') }}</x-button>
         </form>
     </div>
     @isset($users)

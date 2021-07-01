@@ -20,6 +20,8 @@ return [
     'Keywords'=>'Keywords',
     'You haven\'t any keywords!'=>'You haven\'t any keywords!',
     'Add'=>'Add',
+    'Find user'=>'Find user'
+    
     
     
     

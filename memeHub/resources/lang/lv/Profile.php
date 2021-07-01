@@ -19,6 +19,7 @@ return [
     'Profile'=>'Profils',
     'Keywords'=>'Atslēgvārdi',
     'You haven\'t any keywords!'=>'Jums nav atslēgvārdu!',
-    'Add'=>'Pievienot'
+    'Add'=>'Pievienot',
+    'Find user'=>'Atrast lietotāju'
 ];
 
