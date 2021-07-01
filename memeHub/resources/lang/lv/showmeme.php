@@ -11,6 +11,7 @@ return [
     'Add comment'=>'Pievienot komentāru',
     'Delete from library'=>'Dzēst no bibliotēkas',
     'No memes'=>'Nav memu',
-    'Library'=>'Bibliotēka'
+    'Library'=>'Bibliotēka',
+    '*Comment was deleted by moderator*'=>'*Moderators izdzēsa komentāru*'
     
 ];
