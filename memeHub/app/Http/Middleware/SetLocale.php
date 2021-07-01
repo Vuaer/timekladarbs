@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\App;
 
 use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Contracts\Session\Session;
 
 class SetLocale
 {
@@ -16,49 +17,28 @@ class SetLocale
      * @return mixed
      */
     
+    
+    
+    
+    
+    
+    
     public function handle(Request $request, Closure $next)
     {
-//    $has= session()->exists("reizes");
-//    echo "has locale ->";
-//    echo $has;
-//    echo " <-has locale";
-//
-//        if($has==NULL)
-//        {
-//                 session(["reizes",0]);   
-//                 echo "set to 0 !sesion dont have reizes";
-//        }
-//
-//    $langArr = array("en", "lv");
-//    if (isset($_SERVER['HTTP_ACCEPT_LANGUAGE'])) {
-//        $languages = explode(',', $_SERVER['HTTP_ACCEPT_LANGUAGE']);
-//    } else {
-//        $languages[0] = "en";
-//    }
-//    $reizes =session()->pull('reizes');
-//    if ($reizes==0) {
-//        session()->increment('reizes');
-//        if (in_array($languages[0], $langArr))
-//        {
-//            App::setLocale($languages[0]);
-//        }
-//        else
-//        {
-//            App::setLocale('en');
-//        }
-//    } else {
-//        echo session('locale');
-//        echo " <-locale";
-//        App::setLocale(session('locale'));  
-//        
-//    }
-//    //echo "$languages[0]";
-//    echo " reizes -> ";
-//    echo session()->pull('reizes');
-//    echo " <-reizes";
-//    //echo session()->has('reizes');
-        App::setLocale(session('locale'));
-        //dd(session('locale'));
+        $locale = $request->getLocale();
+        echo session('locale');
+        if ($request->session()->has('locale')) {
+            $locale = $request->session()->get('locale');
+        }
+        
+        config(['app.locale' => $locale]);
+        //App::setLocale(session($locale));
+        
         return $next($request);
     }
+
+       
+        
+       
+    
 }
