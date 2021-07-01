@@ -119,7 +119,7 @@
                             <div >
                                 @if($comment->blocked == 1)
                                 <strong>{{ $comment->user->name }}</strong>
-                                <p style="font-style:italic;">*Comment was deleted by moderator*</p>                               
+                                <p style="font-style:italic;">{{ __('showmeme.*Comment was deleted by moderator*') }}</p>                               
                                 @else
                                 <strong>{{ $comment->user->name }}</strong>
                                 <p>{{ $comment->comment_text }}</p>

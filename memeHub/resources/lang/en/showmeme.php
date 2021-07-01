@@ -11,5 +11,6 @@ return [
     'Add comment'=>'Add comment',
     'Delete from library'=>'Delete from library',
     'No memes'=>'No memes',
-    'Library'=>'Library'
+    'Library'=>'Library',
+    '*Comment was deleted by moderator*'=>'*Comment was deleted by moderator*'
 ];
