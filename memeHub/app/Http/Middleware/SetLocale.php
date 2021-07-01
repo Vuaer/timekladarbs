@@ -26,7 +26,7 @@ class SetLocale
     public function handle(Request $request, Closure $next)
     {
         $locale = $request->getLocale();
-        echo session('locale');
+
         if ($request->session()->has('locale')) {
             $locale = $request->session()->get('locale');
         }
