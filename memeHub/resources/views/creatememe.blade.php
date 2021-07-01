@@ -15,14 +15,29 @@
                      <form action='{{ route('meme.create') }}' method="POST" >
                            @csrf
                            <label for="imgn"> {{ __('creatememe.Image title') }} </label>
-                           <input type="text" name="imgname" id="imgn" placeholder="{{ __('creatememe.Your title') }}">
+                           <input type="text" name="imgname" id="imgn" placeholder="{{ __('creatememe.Your title') }}" class="form-control @error('textinput1') is-invalid @enderror">
+                           @error('imgname')
+                                <span class="invalid-feedback">
+                                    <strong>{{$message}}</strong>
+                                </span>
+                           @enderror
                            <br>
                            <label for="text1"> {{ __('creatememe.First text') }} </label>
-                           <input type="text" name="textinput1" id="text1" placeholder="{{ __('creatememe.Your text') }}">
+                           <input type="text" name="textinput1" id="text1" placeholder="{{ __('creatememe.Your text') }}" class="form-control @error('textinput1') is-invalid @enderror">
+                           @error('textinput1')
+                                <span class="invalid-feedback">
+                                    <strong>{{$message}}</strong>
+                                </span>
+                           @enderror
                            <br>
                            <label for="text2"> {{ __('creatememe.Second text') }} </label>
-                           <input type="text" name="textinput2" id="text2" placeholder="{{ __('creatememe.Your text') }}">
+                           <input type="text" name="textinput2" id="text2" placeholder="{{ __('creatememe.Your text') }}" class="form-control @error('textinput2') is-invalid @enderror">
                            <input type="hidden" name="img" id="imgid" value="<?= $id ?>">
+                           @error('textinput2')
+                                <span class="invalid-feedback">
+                                    <strong>{{$message}}</strong>
+                                </span>
+                           @enderror
                            <br>
                            <input type="submit" name="my_form_submit_button" value="{{ __('creatememe.Upload') }}" >
 

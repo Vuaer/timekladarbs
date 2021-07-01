@@ -5,6 +5,7 @@ use App\Models\Template;
 use Illuminate\Http\Request;
 use App\Models\Meme;
 use Auth;
+use Illuminate\Validation\Rule;
 
 class CreateController extends Controller
 {
@@ -40,6 +41,14 @@ class CreateController extends Controller
      */
     public function upload(Request $request)
     {
+        $rules = array
+                (
+                    'textinput1' => 'required | string | min:1 | max:18',
+                    'textinput2' => 'required | string | min:1 | max:18',
+                    'imgname' => 'required | string | min:1 | max:30'
+                );
+       $this->validate($request,$rules);
+
        $id = $request->img;
 //       $ids = explode(".", $id, 2);
        $template = Template::where('name', "$id")->firstOrFail();
