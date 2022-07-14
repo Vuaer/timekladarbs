@@ -79,9 +79,6 @@ Route::get('locale/{locale}',[ProfileController::class,'changeLocale'])->name('l
 
 Route::get('/profile/delete/{keyword}',[ProfileController::class,'deleteKeyword']);
 
-//Route::get('/mail',function(){
-//    Illuminate\Support\Facades\Mail::to(Auth::user()->email)->send(new Welcome);
-//});
 
 
 });
